@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="hu" data-lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>YEP Content – Nagyobb történetek erősebb márkáknak</title>
+  <meta name="description" content="Reklámfilmek, kampányok és social content a koncepciótól a kész anyagig. Kérj ajánlatot a YEP Content csapatától." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="robots" content="index,follow" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="YEP Content – Nagyobb történetek erősebb márkáknak." />
+  <meta property="og:description" content="Reklámfilmek, kampányok és social content a koncepciótól a kész anyagig." />
+  <meta property="og:image" content="/media/placeholders/ph-hero-poster.jpg" />
+  <meta property="og:locale" content="hu_HU" />
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__logo"><img src="/logo.svg" alt="" width="120" height="70" /></div>
+    <div class="loader__bar"><span></span></div>
+  </div>
+
+  <!-- Scroll progress -->
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- Custom cursor (desktop) -->
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__label">PLAY</span></div>
+
+  <!-- Header -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="nav__logo" href="#top" aria-label="YEP Content"><img src="/logo.svg" alt="YEP" width="76" height="44" /></a>
+      <nav class="nav__links" aria-label="Fő navigáció">
+        <a href="#projektek" data-i18n="nav.projects">Projektek</a>
+        <a href="#szolgaltatasok" data-i18n="nav.services">Szolgáltatások</a>
+        <a href="#rolunk" data-i18n="nav.about">Rólunk</a>
+        <a href="#ajanlat" data-i18n="nav.contact">Kapcsolat</a>
+      </nav>
+      <div class="nav__right">
+        <a class="btn btn--primary btn--sm" href="#ajanlat" data-booking data-i18n="nav.book">Időpontot foglalok</a>
+        <div class="lang" aria-label="Nyelv">
+          <a href="?lang=hu" data-lang-link="hu" class="is-active">HU</a><span>/</span><a href="?lang=en" data-lang-link="en">EN</a>
+        </div>
+        <button class="burger" id="burger" aria-label="Menü" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu__inner">
+      <nav class="menu__links">
+        <a href="#projektek" data-i18n="nav.projects">Projektek</a>
+        <a href="#szolgaltatasok" data-i18n="nav.services">Szolgáltatások</a>
+        <a href="#rolunk" data-i18n="nav.about">Rólunk</a>
+        <a href="#ajanlat" data-i18n="nav.contact">Kapcsolat</a>
+      </nav>
+      <div class="menu__foot">
+        <a class="btn btn--primary" href="#ajanlat" data-booking data-i18n="nav.book">Időpontot foglalok</a>
+        <div class="menu__socials">
+          <a data-social="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
+          <a data-social="linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
+          <a data-social="youtube" href="#" target="_blank" rel="noopener">YouTube</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="top">
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="hero">
+      <div class="hero__media">
+        <video class="hero__video" data-media="hero.video" data-poster="hero.poster" muted playsinline loop autoplay preload="metadata" aria-hidden="true"></video>
+        <div class="hero__shade"></div>
+        <div class="hero__vignette"></div>
+      </div>
+
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <p class="eyebrow" data-hero="eyebrow" data-i18n="hero.eyebrow">YEP Content</p>
+          <h1 class="hero__title" data-hero="title">
+            <span class="line"><span class="line__in" data-i18n="hero.l1">Nagyobb</span></span>
+            <span class="line"><span class="line__in line__in--dim" data-i18n="hero.l2">történetek</span></span>
+            <span class="line"><span class="line__in" data-i18n="hero.l3">erősebb</span></span>
+            <span class="line"><span class="line__in line__in--dim"><span data-i18n="hero.l4">márkáknak</span><span class="dot">.</span></span></span>
+          </h1>
+          <p class="hero__lead" data-hero="lead" data-i18n="hero.lead">Reklámfilmek, kampányok és social content a koncepciótól a kész anyagig.</p>
+          <div class="hero__actions" data-hero="actions">
+            <a class="btn btn--primary" href="#ajanlat"><span data-i18n="hero.cta1">Ajánlatot kérek</span><i class="btn__arrow" aria-hidden="true">→</i></a>
+            <a class="btn btn--ghost" href="#rolunk" data-i18n="hero.cta2">További info</a>
+          </div>
+        </div>
+
+        <button class="play-pill" type="button" data-hero="play" data-open-video="showreel" data-cursor="play">
+          <span class="play-pill__circle" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span>
+          <span class="play-pill__label"><span data-i18n="hero.play1">Nézd meg</span><br /><span data-i18n="hero.play2">a showreelünket</span></span>
+        </button>
+
+        <div class="hero__bottom" data-hero="bottom">
+          <ul class="stats" aria-label="Számokban">
+            <li><strong><span class="count" data-count="6">0</span>+</strong><span data-i18n="stats.years">év a piacon</span></li>
+            <li><strong><span class="count" data-count="900">0</span>+</strong><span data-i18n="stats.films">film</span></li>
+            <li><strong><span class="count" data-count="200">0</span>+</strong><span data-i18n="stats.brands">magyar márka</span></li>
+          </ul>
+          <div class="hero__meta">
+            <span class="timecode" id="timecode" aria-hidden="true">00:00:00:00</span>
+            <span class="tagline">More than content <i class="tagline__dash" aria-hidden="true"></i></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MARQUEE ================= -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <div class="marquee__group"><span>More than content</span><i></i><span data-i18n="marquee.1">Reklámfilm</span><i></i><span data-i18n="marquee.2">Social content</span><i></i><span data-i18n="marquee.3">Események</span><i></i></div>
+        <div class="marquee__group"><span>More than content</span><i></i><span data-i18n="marquee.1">Reklámfilm</span><i></i><span data-i18n="marquee.2">Social content</span><i></i><span data-i18n="marquee.3">Események</span><i></i></div>
+        <div class="marquee__group"><span>More than content</span><i></i><span data-i18n="marquee.1">Reklámfilm</span><i></i><span data-i18n="marquee.2">Social content</span><i></i><span data-i18n="marquee.3">Események</span><i></i></div>
+        <div class="marquee__group"><span>More than content</span><i></i><span data-i18n="marquee.1">Reklámfilm</span><i></i><span data-i18n="marquee.2">Social content</span><i></i><span data-i18n="marquee.3">Események</span><i></i></div>
+      </div>
+    </div>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="about section" id="rolunk">
+      <div class="container about__grid">
+        <figure class="about__media media-frame" data-reveal="clip">
+          <img data-media="about.image" alt="" loading="lazy" />
+          <figcaption class="rec" aria-hidden="true"><span class="rec__dot"></span>REC <span class="rec__tc" data-tc>00:00:00</span></figcaption>
+          <span class="corner corner--tl"></span><span class="corner corner--tr"></span><span class="corner corner--bl"></span><span class="corner corner--br"></span>
+        </figure>
+        <div class="about__content">
+          <p class="eyebrow" data-reveal data-i18n="about.eyebrow">Nem csak videókat gyártunk.</p>
+          <h2 class="h2" data-split data-i18n="about.title">Olyan tartalmakat, amik hosszú távon dolgoznak a márkádért.</h2>
+          <p class="lead" data-reveal data-i18n="about.text">A jó tartalom több, mint elérés vagy kattintás. Segít megkülönböztetni, hitelességet épít, és valódi üzleti értéket teremt.</p>
+          <a class="link" data-reveal href="#" data-ext="about"><span data-i18n="about.link">Tovább a rólunkhoz</span> <i aria-hidden="true">→</i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SERVICES ================= -->
+    <section class="services section" id="szolgaltatasok">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <p class="eyebrow" data-reveal data-i18n="services.eyebrow">Szolgáltatásaink</p>
+            <h2 class="h2" data-split data-i18n="services.title">Három terület. Egy szemlélet.</h2>
+          </div>
+          <p class="section__note" data-reveal data-i18n="services.note">Minden platform más, de a cél ugyanaz: minőségi tartalom, ami valódi értéket teremt.</p>
+        </div>
+        <div class="services__grid" data-stagger>
+          <article class="card" data-reveal data-service="Reklámfilm & kampány">
+            <div class="card__media media-frame" data-reveal="clip"><img data-media="services.0.image" alt="" loading="lazy" /></div>
+            <span class="card__num">01</span>
+            <h3 class="card__title" data-i18n="services.1.title">Reklámfilm &amp; kampány</h3>
+            <p class="card__text" data-i18n="services.1.text">Nagy ötletek, igényes megvalósítás. A márkád történetére filmvászon.</p>
+            <a class="link" href="#ajanlat" data-preselect="Reklámfilm & kampány"><span data-i18n="services.more">Tovább</span> <i aria-hidden="true">→</i></a>
+          </article>
+          <article class="card" data-reveal data-service="Social content">
+            <div class="card__media media-frame" data-reveal="clip"><img data-media="services.1.image" alt="" loading="lazy" /></div>
+            <span class="card__num">02</span>
+            <h3 class="card__title" data-i18n="services.2.title">Social content</h3>
+            <p class="card__text" data-i18n="services.2.text">TikTok, Reels, Shorts. Gyors, natív, kompromisszumok nélkül.</p>
+            <a class="link" href="#ajanlat" data-preselect="Social content"><span data-i18n="services.more">Tovább</span> <i aria-hidden="true">→</i></a>
+          </article>
+          <article class="card" data-reveal data-service="Események">
+            <div class="card__media media-frame" data-reveal="clip"><img data-media="services.2.image" alt="" loading="lazy" /></div>
+            <span class="card__num">03</span>
+            <h3 class="card__title" data-i18n="services.3.title">Események</h3>
+            <p class="card__text" data-i18n="services.3.text">Aftermovie, interjúk, backstage. Az eseményed nem ér véget a helyszínen.</p>
+            <a class="link" href="#ajanlat" data-preselect="Események"><span data-i18n="services.more">Tovább</span> <i aria-hidden="true">→</i></a>
+          </article>
+        </div>
+      </div>
+
+      <!-- Social strip: vertical clips -->
+      <div class="social">
+        <div class="container social__head">
+          <p class="eyebrow" data-reveal><span class="eyebrow__num">02</span> Social content</p>
+          <p class="social__hint" data-reveal aria-hidden="true">9:16</p>
+        </div>
+        <div class="social__track" data-reveal>
+          <div class="social__item media-frame"><video data-media="social.0.video" data-poster="social.0.poster" muted playsinline loop preload="none" data-autoplay></video></div>
+          <div class="social__item media-frame"><video data-media="social.1.video" data-poster="social.1.poster" muted playsinline loop preload="none" data-autoplay></video></div>
+          <div class="social__item media-frame"><video data-media="social.2.video" data-poster="social.2.poster" muted playsinline loop preload="none" data-autoplay></video></div>
+          <div class="social__item media-frame"><video data-media="social.3.video" data-poster="social.3.poster" muted playsinline loop preload="none" data-autoplay></video></div>
+          <div class="social__item media-frame"><video data-media="social.4.video" data-poster="social.4.poster" muted playsinline loop preload="none" data-autoplay></video></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section class="projects section" id="projektek">
+      <div class="container">
+        <div class="section__head section__head--tight">
+          <div>
+            <p class="eyebrow" data-reveal data-i18n="projects.eyebrow">Kiemelt projektek</p>
+            <h2 class="h2" data-split data-i18n="projects.title">Néhány történet, amire büszkék vagyunk.</h2>
+          </div>
+          <a class="link" data-reveal href="#" data-ext="projects"><span data-i18n="projects.all">Összes projekt</span> <i aria-hidden="true">→</i></a>
+        </div>
+      </div>
+      <div class="projects__grid" data-stagger>
+        <article class="project" data-reveal data-open-video="projects.0" data-cursor="play">
+          <div class="project__media media-frame">
+            <video data-media="projects.0.video" data-poster="projects.0.poster" muted playsinline loop preload="none" data-autoplay></video>
+          </div>
+          <div class="project__meta">
+            <div><h3 class="project__title">Dominik Szoboszlai</h3><p class="project__sub" data-i18n="projects.1.sub">Kampányfilm</p></div>
+            <span class="project__play" aria-hidden="true"><svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span>
+          </div>
+        </article>
+        <article class="project" data-reveal data-open-video="projects.1" data-cursor="play">
+          <div class="project__media media-frame">
+            <video data-media="projects.1.video" data-poster="projects.1.poster" muted playsinline loop preload="none" data-autoplay></video>
+          </div>
+          <div class="project__meta">
+            <div><h3 class="project__title">FBC</h3><p class="project__sub" data-i18n="projects.2.sub">Kampány</p></div>
+            <span class="project__play" aria-hidden="true"><svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span>
+          </div>
+        </article>
+        <article class="project" data-reveal data-open-video="projects.2" data-cursor="play">
+          <div class="project__media media-frame">
+            <video data-media="projects.2.video" data-poster="projects.2.poster" muted playsinline loop preload="none" data-autoplay></video>
+          </div>
+          <div class="project__meta">
+            <div><h3 class="project__title">Clark</h3><p class="project__sub" data-i18n="projects.3.sub">1 órás dokumentumfilm</p></div>
+            <span class="project__play" aria-hidden="true"><svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span>
+          </div>
+        </article>
+        <article class="project" data-reveal data-open-video="projects.3" data-cursor="play">
+          <div class="project__media media-frame">
+            <video data-media="projects.3.video" data-poster="projects.3.poster" muted playsinline loop preload="none" data-autoplay></video>
+          </div>
+          <div class="project__meta">
+            <div><h3 class="project__title">Market Építő</h3><p class="project__sub" data-i18n="projects.4.sub">Kampány</p></div>
+            <span class="project__play" aria-hidden="true"><svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span>
+          </div>
+        </article>
+      </div>
+
+      <!-- Photo gallery -->
+      <div class="container gallery">
+        <p class="eyebrow gallery__eyebrow" data-reveal><span class="eyebrow__num">03</span> <span data-i18n="gallery.eyebrow">Fotó</span></p>
+        <div class="gallery__grid">
+          <figure class="gallery__item media-frame g1" data-reveal="clip"><img data-media="gallery.0.image" alt="" loading="lazy" /></figure>
+          <figure class="gallery__item media-frame g2" data-reveal="clip"><img data-media="gallery.1.image" alt="" loading="lazy" /></figure>
+          <figure class="gallery__item media-frame g3" data-reveal="clip"><img data-media="gallery.2.image" alt="" loading="lazy" /></figure>
+          <figure class="gallery__item media-frame g4" data-reveal="clip"><img data-media="gallery.3.image" alt="" loading="lazy" /></figure>
+          <figure class="gallery__item media-frame g5" data-reveal="clip"><img data-media="gallery.4.image" alt="" loading="lazy" /></figure>
+          <figure class="gallery__item media-frame g6" data-reveal="clip"><img data-media="gallery.5.image" alt="" loading="lazy" /></figure>
+          <figure class="gallery__item media-frame g7" data-reveal="clip"><img data-media="gallery.6.image" alt="" loading="lazy" /></figure>
+          <figure class="gallery__item media-frame g8" data-reveal="clip"><img data-media="gallery.7.image" alt="" loading="lazy" /></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TESTIMONIAL ================= -->
+    <section class="quote section" id="velemeny">
+      <div class="quote__wipe" aria-hidden="true"></div>
+      <div class="quote__grid">
+        <div class="quote__content">
+          <p class="script script--yellow" data-reveal="script" aria-label="Good brands tell better stories">Good<br />brands<br />tell<br />better<br />stories</p>
+          <blockquote class="quote__text" data-split data-i18n="quote.text">„A YEP olyan minőséget hozott, amit ritkán látni itthon. Kreatív, profi és megbízható csapat.”</blockquote>
+          <div class="quote__author" data-reveal>
+            <span class="quote__mark" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M13 11v18M27 11v18M13 20h14" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+            <span><strong>Al Habtoor Palace</strong><small>Budapest</small></span>
+          </div>
+        </div>
+        <figure class="quote__media media-frame" data-reveal="clip">
+          <img data-media="testimonial.image" alt="" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section class="cta section" id="kapcsolat">
+      <span class="watermark" aria-hidden="true">YEP</span>
+      <div class="container cta__grid">
+        <div class="cta__content">
+          <p class="eyebrow" data-reveal data-i18n="cta.eyebrow">Következő lépés</p>
+          <h2 class="h2 h2--xl" data-split data-i18n="cta.title">Van egy projekted? Beszéljünk róla.</h2>
+          <p class="lead" data-reveal data-i18n="cta.text">Foglalj egy 30 perces konzultációt, vagy kérj e-mailben árajánlatot.</p>
+          <div class="cta__actions" data-reveal>
+            <a class="btn btn--primary" href="#ajanlat" data-booking><span data-i18n="cta.book">Időpontot foglalok</span><i class="btn__arrow" aria-hidden="true">→</i></a>
+            <a class="btn btn--ghost" href="#ajanlat" data-i18n="cta.mail">E-mail árajánlatot kérek</a>
+          </div>
+        </div>
+        <figure class="cta__media media-frame" data-reveal="clip"><img data-media="cta.image" alt="" loading="lazy" /></figure>
+      </div>
+    </section>
+
+    <!-- ================= QUOTE FORM ================= -->
+    <section class="quote-form section" id="ajanlat">
+      <div class="container quote-form__grid">
+        <div class="quote-form__intro">
+          <p class="eyebrow" data-reveal data-i18n="form.eyebrow">Ajánlat</p>
+          <h2 class="h2" data-split data-i18n="form.title">Kérj ajánlatot.</h2>
+          <p class="lead" data-reveal data-i18n="form.text">Mesélj röviden a projektről, mi pedig visszajelzünk egy személyre szabott ajánlattal.</p>
+          <ul class="quote-form__points" data-reveal>
+            <li><i></i><span data-i18n="form.p1">Reklámfilm, social content, esemény</span></li>
+            <li><i></i><span data-i18n="form.p2">Koncepciótól a kész anyagig</span></li>
+            <li><i></i><span data-i18n="form.p3">Budapest – Hungary</span></li>
+          </ul>
+          <a class="quote-form__mail link" data-reveal data-mailto href="#"><span data-mailto-text>yep.content@gmail.com</span> <i aria-hidden="true">→</i></a>
+        </div>
+
+        <form class="form" id="quote-form" novalidate data-reveal>
+          <div class="form__row">
+            <label class="field">
+              <span class="field__label" data-i18n="form.name">Név *</span>
+              <input name="name" type="text" autocomplete="name" required minlength="2" maxlength="120" />
+            </label>
+            <label class="field">
+              <span class="field__label" data-i18n="form.email">E-mail *</span>
+              <input name="email" type="email" autocomplete="email" required maxlength="254" />
+            </label>
+          </div>
+          <div class="form__row">
+            <label class="field">
+              <span class="field__label" data-i18n="form.phone">Telefonszám</span>
+              <input name="phone" type="tel" autocomplete="tel" maxlength="40" />
+            </label>
+            <label class="field">
+              <span class="field__label" data-i18n="form.company">Cég / márka</span>
+              <input name="company" type="text" autocomplete="organization" maxlength="120" />
+            </label>
+          </div>
+          <div class="form__row">
+            <label class="field field--select">
+              <span class="field__label" data-i18n="form.service">Milyen tartalom érdekel?</span>
+              <select name="service">
+                <option value="" data-i18n="form.service.0">Válassz…</option>
+                <option value="Reklámfilm & kampány" data-i18n="form.service.1">Reklámfilm &amp; kampány</option>
+                <option value="Social content" data-i18n="form.service.2">Social content</option>
+                <option value="Események" data-i18n="form.service.3">Események</option>
+                <option value="Fotózás" data-i18n="form.service.4">Fotózás</option>
+                <option value="Egyéb" data-i18n="form.service.5">Egyéb / még nem tudom</option>
+              </select>
+            </label>
+            <label class="field field--select">
+              <span class="field__label" data-i18n="form.budget">Tervezett keret</span>
+              <select name="budget">
+                <option value="" data-i18n="form.budget.0">Válassz…</option>
+                <option value="< 500e Ft">&lt; 500 ezer Ft</option>
+                <option value="500e – 1,5M Ft">500 ezer – 1,5 M Ft</option>
+                <option value="1,5M – 5M Ft">1,5 M – 5 M Ft</option>
+                <option value="5M+ Ft">5 M Ft felett</option>
+                <option value="Még nem tudom" data-i18n="form.budget.5">Még nem tudom</option>
+              </select>
+            </label>
+          </div>
+          <label class="field">
+            <span class="field__label" data-i18n="form.intro">Miről szól a projekt? *</span>
+            <input name="project_intro" type="text" required minlength="3" maxlength="300" data-i18n-ph="form.intro.ph" placeholder="Pl. 60 mp-es imázsfilm egy új prémium termékhez, októberi forgatással" />
+          </label>
+          <label class="field">
+            <span class="field__label" data-i18n="form.message">Üzenet</span>
+            <textarea name="message" rows="3" maxlength="3000" data-i18n-ph="form.message.ph" placeholder="Bármi, amit még fontosnak tartasz: határidő, platformok, referenciák…"></textarea>
+          </label>
+          <!-- honeypot -->
+          <label class="hp" aria-hidden="true"><input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+
+          <label class="check">
+            <input name="consent" type="checkbox" required />
+            <span class="check__box" aria-hidden="true"></span>
+            <span class="check__text" data-i18n="form.consent">Hozzájárulok, hogy a YEP Content az ajánlatkérés céljából kezelje a megadott adataimat.</span>
+          </label>
+
+          <div class="form__foot">
+            <button class="btn btn--primary btn--lg" type="submit"><span class="btn__text" data-i18n="form.submit">Ajánlatot kérek</span><i class="btn__arrow" aria-hidden="true">→</i><span class="btn__spinner" aria-hidden="true"></span></button>
+            <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="form__success" id="form-success" hidden>
+            <span class="form__success-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M4 12.5l5 5L20 6.5"/></svg></span>
+            <h3 data-i18n="form.success.title">Köszönjük, megkaptuk!</h3>
+            <p data-i18n="form.success.text">Hamarosan jelentkezünk a részletekkel. Addig is nézd meg a munkáinkat.</p>
+            <a class="link" href="#projektek"><span data-i18n="form.success.link">Projektek</span> <i aria-hidden="true">→</i></a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <a class="footer__logo" href="#top" aria-label="YEP Content"><img src="/logo.svg" alt="YEP" width="90" height="52" /></a>
+        <nav class="footer__links" aria-label="Lábléc navigáció">
+          <a href="#projektek" data-i18n="nav.projects">Projektek</a>
+          <a href="#szolgaltatasok" data-i18n="nav.services">Szolgáltatások</a>
+          <a href="#rolunk" data-i18n="nav.about">Rólunk</a>
+          <a href="#ajanlat" data-i18n="nav.contact">Kapcsolat</a>
+        </nav>
+        <p class="script script--white footer__script" aria-label="More than content">More<br />than<br />content</p>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__company"><strong>YEP Content</strong><span>Budapest – Hungary</span></p>
+        <div class="footer__socials">
+          <a data-social="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
+          <a data-social="linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
+          <a data-social="youtube" href="#" target="_blank" rel="noopener">YouTube</a>
+        </div>
+        <p class="footer__copy">© <span id="year">2026</span> YEP Content</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= VIDEO MODAL ================= -->
+  <div class="modal" id="video-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Videó">
+    <div class="modal__backdrop" data-close-modal></div>
+    <div class="modal__box">
+      <button class="modal__close" type="button" data-close-modal aria-label="Bezárás"><span></span><span></span></button>
+      <div class="modal__player" id="modal-player"></div>
+      <p class="modal__caption" id="modal-caption"></p>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

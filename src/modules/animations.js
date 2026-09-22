@@ -1,0 +1,164 @@
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
+
+gsap.registerPlugin(ScrollTrigger, SplitText);
+ScrollTrigger.config({ ignoreMobileResize: true });
+if (typeof window !== 'undefined') window.__yep = { gsap, ScrollTrigger };
+
+const $ = (s, root = document) => root.querySelector(s);
+const $$ = (s, root = document) => Array.from(root.querySelectorAll(s));
+
+export async function initAnimations() {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  try { await document.fonts.ready; } catch (_) { /* noop */ }
+
+  if (reduce) {
+    revealEverything();
+    return;
+  }
+
+  try {
+    intro();
+    scrollReveals();
+    splitHeadings();
+    sectionMoments();
+    progressBar();
+  } catch (err) {
+    console.error('[yep] animations failed, revealing content', err);
+    revealEverything();
+  }
+}
+
+/* ---------- preloader + hero intro ---------- */
+function intro() {
+  const loader = $('#loader');
+  const seen = (() => { try { return sessionStorage.getItem('yep-seen') === '1'; } catch (_) { return false; } })();
+  try { sessionStorage.setItem('yep-seen', '1'); } catch (_) { /* noop */ }
+
+  gsap.set('.hero__title .line__in', { yPercent: 112 });
+  gsap.set('.hero__video', { opacity: 0, scale: 1.06, transformOrigin: '50% 50%' });
+
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+  if (!seen) {
+    tl.to('.loader__logo img', { opacity: 1, duration: 0.7, ease: 'power2.out' })
+      .to('.loader__bar span', { scaleX: 1, duration: 1.0, ease: 'power3.inOut' }, '-=0.35')
+      .to('.loader__logo img', { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in' }, '+=0.1')
+      .to(loader, { yPercent: -100, duration: 0.95, ease: 'expo.inOut' }, '-=0.15')
+      .set(loader, { display: 'none' });
+  } else {
+    tl.to(loader, { opacity: 0, duration: 0.35 }).set(loader, { display: 'none' });
+  }
+
+  tl.to('.hero__video', { opacity: 1, scale: 1, duration: 1.8, ease: 'power2.out' }, seen ? '<' : '-=0.75')
+    .from('[data-hero="eyebrow"]', { y: 18, opacity: 0, duration: 0.8 }, '<+0.15')
+    .to('.hero__title .line__in', { yPercent: 0, duration: 1.15, ease: 'expo.out', stagger: 0.09 }, '<+0.05')
+    .from('[data-hero="lead"]', { y: 22, opacity: 0, duration: 0.9 }, '<+0.4')
+    .from('[data-hero="actions"] .btn', { y: 18, opacity: 0, duration: 0.8, stagger: 0.08 }, '<+0.15')
+    .from('[data-hero="play"]', { x: 24, opacity: 0, duration: 0.9 }, '<')
+    .from('[data-hero="bottom"]', { y: 16, opacity: 0, duration: 0.9, onStart: countUp }, '<+0.1')
+    .from('#nav', { y: -16, opacity: 0, duration: 0.9 }, '<');
+}
+
+function countUp() {
+  $$('.count').forEach((el) => {
+    const target = Number(el.dataset.count) || 0;
+    const obj = { v: 0 };
+    gsap.to(obj, { v: target, duration: 1.9, ease: 'power3.out', onUpdate: () => { el.textContent = String(Math.round(obj.v)); } });
+  });
+}
+
+/* ---------- scroll reveals ---------- */
+function scrollReveals() {
+  $$('[data-reveal]').forEach((el) => {
+    const type = el.dataset.reveal;
+    const stagger = el.closest('[data-stagger]');
+    const delay = stagger ? Array.from(stagger.children).indexOf(el) * 0.1 : 0;
+
+    if (type === 'clip') {
+      const media = el.querySelector('img, video');
+      gsap.set(el, { clipPath: 'inset(100% 0% 0% 0%)', webkitClipPath: 'inset(100% 0% 0% 0%)' });
+      if (media) gsap.set(media, { scale: 1.16, transformOrigin: '50% 50%' });
+      const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+      tl.to(el, { clipPath: 'inset(0% 0% 0% 0%)', webkitClipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.out', delay });
+      if (media) tl.to(media, { scale: 1, duration: 1.7, ease: 'power3.out', clearProps: 'transform' }, '<');
+      tl.set(el, { clearProps: 'clipPath,webkitClipPath' });
+      return;
+    }
+
+    if (type === 'script') {
+      gsap.set(el, { clipPath: 'inset(-15% 100% -15% -5%)' });
+      gsap.to(el, {
+        clipPath: 'inset(-15% -5% -15% -5%)', duration: 1.5, ease: 'power3.inOut',
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+      });
+      return;
+    }
+
+    gsap.set(el, { opacity: 0, y: 36 });
+    gsap.to(el, {
+      opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', delay,
+      scrollTrigger: { trigger: el, start: 'top 90%', once: true },
+      onComplete: () => gsap.set(el, { clearProps: 'transform' }),
+    });
+  });
+}
+
+/* ---------- headings: masked line reveal ---------- */
+function splitHeadings() {
+  $$('[data-split]').forEach((el) => {
+    SplitText.create(el, {
+      type: 'lines',
+      mask: 'lines',
+      autoSplit: true,
+      onSplit(self) {
+        return gsap.from(self.lines, {
+          yPercent: 110, duration: 1.15, ease: 'expo.out', stagger: 0.09,
+          scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+        });
+      },
+    });
+  });
+}
+
+/* ---------- section-level moments ---------- */
+function sectionMoments() {
+  // testimonial: yellow wipe reveals the section
+  const wipe = $('.quote__wipe');
+  if (wipe) {
+    gsap.set(wipe, { scaleY: 1, transformOrigin: 'bottom' });
+    gsap.to(wipe, {
+      scaleY: 0, duration: 1.25, ease: 'expo.inOut',
+      scrollTrigger: { trigger: '.quote', start: 'top 72%', once: true },
+    });
+  }
+
+  // CTA watermark fades in
+  const wm = $('.watermark');
+  if (wm) {
+    gsap.to(wm, { opacity: 1, duration: 1.6, ease: 'power2.out', scrollTrigger: { trigger: '.cta', start: 'top 70%', once: true } });
+  }
+
+  // hairline rules (section tops) draw in
+  $$('.section__head, .hero__bottom').forEach((el) => {
+    if (!el.classList.contains('hero__bottom')) return;
+  });
+}
+
+/* ---------- scroll progress ---------- */
+function progressBar() {
+  const bar = $('#progress');
+  if (!bar) return;
+  gsap.to(bar, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 0.4 } });
+}
+
+/* ---------- fallback: show everything ---------- */
+function revealEverything() {
+  gsap.set('#loader', { display: 'none' });
+  gsap.set('.hero__video', { opacity: 1, scale: 1 });
+  gsap.set('.hero__title .line__in', { yPercent: 0 });
+  gsap.set('[data-hero], [data-reveal], #nav, .watermark', { opacity: 1, clearProps: 'transform,clipPath' });
+  gsap.set('.quote__wipe', { scaleY: 0 });
+  $$('.count').forEach((el) => { el.textContent = el.dataset.count; });
+}
