@@ -1,0 +1,88 @@
+{
+  "hero": {
+    "file": "MERCAR_TVC_edit_5.mp4",
+    "start": 0,
+    "duration": 21.5,
+    "mute": true,
+    "crf": 26
+  },
+  "showreel": "yep showreel.mov",
+  "projects": [
+    {
+      "file": "2023_11_19_Szoboszlai_EB_v3.mov",
+      "crf": 25
+    },
+    {
+      "file": "domPerignon_product_v2.mp4",
+      "crf": 24
+    },
+    {
+      "file": "Kimpton - Trailer 1st Episode - v5.mp4",
+      "crf": 24
+    },
+    {
+      "file": "BudaPart projekt.mov",
+      "crf": 25
+    }
+  ],
+  "social": [
+    {
+      "file": "stadium_x_cupra_final_01 (9-16).MP4",
+      "start": 1,
+      "duration": 20,
+      "mute": true,
+      "crf": 27,
+      "maxHeight": 720
+    },
+    {
+      "file": "2023_12_20_Bigfish_long_v5_vertical.MP4",
+      "start": 2,
+      "duration": 20,
+      "mute": true,
+      "crf": 27,
+      "maxHeight": 720
+    },
+    {
+      "file": "Video 2026. 02. 11., 10 01 51 (3).mp4",
+      "start": 0,
+      "duration": 20,
+      "mute": true,
+      "crf": 27,
+      "maxHeight": 720
+    },
+    {
+      "file": "million roses.mov",
+      "start": 3,
+      "duration": 20,
+      "mute": true,
+      "crf": 27,
+      "maxHeight": 720
+    },
+    {
+      "file": "szoboszlai_dijatado_03.MP4",
+      "start": 5,
+      "duration": 20,
+      "mute": true,
+      "crf": 27,
+      "maxHeight": 720
+    }
+  ],
+  "about": "IMG_8497.jpg",
+  "services": [
+    "9H3A8651_edit.jpg",
+    "VRP_7873.jpg",
+    "1cbfe494-da8b-49c5-abcc-cf84a3b47612_rw_3840.jpg"
+  ],
+  "gallery": [
+    "Avalon_Yep-52.jpg",
+    "BAL09190.jpg",
+    "VRP_9214.jpg",
+    "Tommy-3296.jpg",
+    "YEP-9292.jpg",
+    "BJP_4518-2.jpg",
+    "JodokCello_YepContent-76.jpg",
+    "bw-3288.jpg"
+  ],
+  "testimonial": "JodokCello_YepContent-88.jpg",
+  "cta": "IMG_3628 3.jpg"
+}

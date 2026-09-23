@@ -50,31 +50,58 @@ function walk(dir, out = []) {
   return out;
 }
 
+const HAS_FFPROBE = has('ffprobe');
+
 function probe(file) {
-  const json = JSON.parse(run('ffprobe', ['-v', 'error', '-print_format', 'json', '-show_streams', '-show_format', file]));
-  const v = (json.streams || []).find((s) => s.codec_type === 'video');
-  if (!v || !v.width || !v.height) return null;
-  let { width: w, height: h } = v;
-  const side = (v.side_data_list || []).find((d) => d.rotation != null);
-  const rot = Math.abs(Number(v.tags?.rotate ?? side?.rotation ?? 0)) % 180;
+  if (HAS_FFPROBE) {
+    const json = JSON.parse(run('ffprobe', ['-v', 'error', '-print_format', 'json', '-show_streams', '-show_format', file]));
+    const v = (json.streams || []).find((s) => s.codec_type === 'video');
+    if (!v || !v.width || !v.height) return null;
+    let { width: w, height: h } = v;
+    const side = (v.side_data_list || []).find((d) => d.rotation != null);
+    const rot = Math.abs(Number(v.tags?.rotate ?? side?.rotation ?? 0)) % 180;
+    if (rot === 90) [w, h] = [h, w];
+    return { w, h, duration: Number(json.format?.duration || 0), portrait: h > w, square: Math.abs(h - w) / Math.max(w, h) < 0.08 };
+  }
+  // ffprobe nélkül: az ffmpeg -i kimenetéből olvassuk ki a méretet, hosszt és forgatást
+  const r = spawnSync('ffmpeg', ['-hide_banner', '-i', file], { encoding: 'utf8', maxBuffer: 16e6 });
+  const txt = (r.stderr || '') + (r.stdout || '');
+  const dim = /Video:.*?\s(\d{2,5})x(\d{2,5})/.exec(txt);
+  if (!dim) return null;
+  let w = Number(dim[1]), h = Number(dim[2]);
+  const dur = /Duration:\s*(\d+):(\d+):(\d+(?:\.\d+)?)/.exec(txt);
+  const duration = dur ? Number(dur[1]) * 3600 + Number(dur[2]) * 60 + Number(dur[3]) : 0;
+  const rotM = /rotation of (-?\d+(?:\.\d+)?)/.exec(txt) || /rotate\s*:\s*(-?\d+)/.exec(txt);
+  const rot = rotM ? Math.abs(Number(rotM[1])) % 180 : 0;
   if (rot === 90) [w, h] = [h, w];
-  return { w, h, duration: Number(json.format?.duration || 0), portrait: h > w, square: Math.abs(h - w) / Math.max(w, h) < 0.08 };
+  return { w, h, duration, portrait: h > w, square: Math.abs(h - w) / Math.max(w, h) < 0.08 };
 }
 
-function encodeVideo(file, slug, info) {
-  const out = path.join(OUT_VIDEO, `${slug}.mp4`);
-  const poster = path.join(OUT_VIDEO, `${slug}.jpg`);
+function encodeVideo(file, slug, info, opts = {}) {
+  // opts (media.map.json objektum forma): start (mp), duration (mp), mute (bool), crf, maxHeight
+  const suffix = [opts.start != null ? `s${opts.start}` : '', opts.duration != null ? `d${opts.duration}` : '', opts.mute ? 'm' : ''].filter(Boolean).join('-');
+  const name = suffix ? `${slug}-${suffix}` : slug;
+  const out = path.join(OUT_VIDEO, `${name}.mp4`);
+  const poster = path.join(OUT_VIDEO, `${name}.jpg`);
+  const maxH = opts.maxHeight || 1080;
   if (!DRY && (FORCE || !newer(out, file))) {
-    console.log(`  ▶  ${path.basename(file)}  →  video/${slug}.mp4`);
-    const scale = info.portrait ? "scale=-2:'min(1920,ih)'" : "scale='min(1920,iw)':-2";
-    run('ffmpeg', ['-y', '-loglevel', 'error', '-i', file, '-vf', scale, '-c:v', 'libx264', '-preset', 'slow', '-crf', '23',
-      '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-c:a', 'aac', '-b:a', '128k', '-ac', '2', out]);
+    console.log(`  ▶  ${path.basename(file)}  →  video/${name}.mp4`);
+    const scale = info.portrait ? `scale='min(${maxH},iw)':-2` : `scale=-2:'min(${maxH},ih)'`;
+    const args = ['-y', '-loglevel', 'error'];
+    if (opts.start != null) args.push('-ss', String(opts.start));
+    args.push('-i', file);
+    if (opts.duration != null) args.push('-t', String(opts.duration));
+    args.push('-vf', scale, '-c:v', 'libx264', '-preset', 'medium', '-crf', String(opts.crf || 23), '-pix_fmt', 'yuv420p', '-movflags', '+faststart');
+    if (opts.mute) args.push('-an'); else args.push('-c:a', 'aac', '-b:a', '128k', '-ac', '2');
+    args.push(out);
+    run('ffmpeg', args);
   }
   if (!DRY && (FORCE || !newer(poster, file)) && fs.existsSync(out)) {
-    const ss = Math.min(1.5, Math.max(0, info.duration / 4)).toFixed(2);
+    const dur = opts.duration != null ? opts.duration : info.duration;
+    const ss = Math.min(1.5, Math.max(0, dur / 4)).toFixed(2);
     run('ffmpeg', ['-y', '-loglevel', 'error', '-ss', ss, '-i', out, '-frames:v', '1', '-q:v', '3', poster]);
   }
-  return { video: `/media/video/${slug}.mp4`, poster: `/media/video/${slug}.jpg`, portrait: info.portrait, duration: info.duration };
+  return { video: `/media/video/${name}.mp4`, poster: `/media/video/${name}.jpg`, portrait: info.portrait, duration: info.duration };
 }
 
 function encodePhoto(file, slug, info) {
@@ -87,10 +114,11 @@ function encodePhoto(file, slug, info) {
 }
 
 /* ------------------------------------------------------------------ */
-if (!has('ffmpeg') || !has('ffprobe')) {
-  console.error('✖ ffmpeg/ffprobe nem található a PATH-on. Telepítés: https://ffmpeg.org/download.html  (macOS: brew install ffmpeg)');
+if (!has('ffmpeg')) {
+  console.error('✖ ffmpeg nem található a PATH-on. Telepítés: https://ffmpeg.org/download.html  (macOS: brew install ffmpeg)');
   process.exit(1);
 }
+if (!HAS_FFPROBE) console.log('ℹ ffprobe nincs a PATH-on, az ffmpeg kimenetéből olvasom a metaadatokat.');
 if (!fs.existsSync(SRC)) {
   console.error(`✖ Nincs forrásmappa: ${path.relative(ROOT, SRC)}\n  Futtasd: npm run media:fetch   vagy másold ide a fájlokat.`);
   process.exit(1);
@@ -112,13 +140,13 @@ for (const f of walk(SRC).sort((a, b) => a.localeCompare(b, 'hu'))) {
   try {
     const info = probe(f);
     if (!info) throw new Error('nem olvasható videó/kép stream');
-    if (VIDEO_EXT.has(ext)) videos.push({ base, slug, ...encodeVideo(f, slug, info) });
-    else photos.push({ base, slug, ...encodePhoto(f, slug, info) });
+    if (VIDEO_EXT.has(ext)) videos.push({ base, slug, src: f, info, video: null, poster: null, portrait: info.portrait, duration: info.duration });
+    else photos.push({ base, slug, src: f, info, image: null, portrait: info.portrait, square: info.square });
   } catch (e) {
     console.warn(`  !  kihagyva: ${base} – ${e.message}`);
   }
 }
-console.log(`▸ ${videos.length} videó, ${photos.length} fotó feldolgozva.`);
+console.log(`▸ ${videos.length} videó, ${photos.length} fotó a forrásban (csak a kiosztottak kerülnek kódolásra).`);
 
 /* ------------------------------------------------------------------ */
 const manifest = JSON.parse(fs.readFileSync(BASE_MANIFEST, 'utf8'));
@@ -147,17 +175,29 @@ const takePhoto = (pref) => {
 const setVideo = (slot, target, item, from) => {
   if (!item) return;
   if (isUrl(item)) { target.url = item; report.push([slot, item, from]); return; }
+  if (!item.video) Object.assign(item, encodeVideo(item.src, item.slug, item.info));
   Object.assign(target, { video: item.video, poster: item.poster, portrait: item.portrait, url: '' });
   report.push([slot, item.base, from]);
 };
 const setPhoto = (slot, target, item, from) => {
   if (!item) return;
+  if (!item.image) Object.assign(item, encodePhoto(item.src, item.slug, item.info));
   target.image = item.image;
   report.push([slot, item.base, from]);
 };
 
 // 1) kézi kiosztás (media.map.json) – először, hogy a poolokból kikerüljenek
-const mapVideo = (v) => (isUrl(v) ? v : findByName(videos, v));
+const mapVideo = (v) => {
+  if (isUrl(v)) return v;
+  const spec = typeof v === 'object' && v ? v : { file: v };
+  if (isUrl(spec.file)) return spec.file;
+  const item = findByName(videos, spec.file);
+  if (!item) return null;
+  if (spec.start != null || spec.duration != null || spec.mute || spec.crf || spec.maxHeight) {
+    return { ...item, ...encodeVideo(item.src, item.slug, item.info, spec) };
+  }
+  return item;
+};
 const mapPhoto = (p) => findByName(photos, p);
 if (map.hero) setVideo('hero', manifest.hero, mapVideo(map.hero), 'map');
 if (map.showreel) setVideo('showreel', manifest.showreel, mapVideo(map.showreel), 'map');
@@ -190,6 +230,6 @@ fs.writeFileSync(MANIFEST, JSON.stringify(manifest, null, 2) + '\n');
 
 console.log('\n▸ Slot kiosztás:');
 report.forEach(([slot, file, from]) => console.log(`  ${slot.padEnd(14)} ← ${file}${from === 'map' ? '   (map)' : ''}`));
-const unused = [...videos.map((v) => v.base), ...photos.map((p) => p.base)];
-if (unused.length) console.log(`\n  Kiosztatlan (nem került az oldalra): ${unused.join(', ')}`);
+const unused = [...videos, ...photos].filter((x) => !x.video && !x.image).length;
+if (unused) console.log(`\n  ${unused} forrásfájl nem került az oldalra (nem lett kódolva).`);
 console.log(`\n✔ Manifest kész: ${path.relative(ROOT, MANIFEST)}${DRY ? '  (dry run – kódolás nélkül)' : ''}`);

@@ -1,12 +1,42 @@
 {
-  "_comment": "Nevezd át media.map.json-ra. Fájlnév = a public/media/source mappában lévő fájl neve. Videó slotoknál YouTube/Vimeo URL is megadható.",
-  "hero": "showreel-loop.mp4",
+  "_comment": "Nevezd át media.map.json-ra. Fájlnév = a public/media/source mappában lévő fájl neve (almappa nélkül is jó). Videó slotnál YouTube/Vimeo URL is megadható, vagy objektum: {\"file\": \"x.mp4\", \"start\": 5, \"duration\": 12, \"mute\": true, \"crf\": 26} (vágás mp-ben, némítás).",
+  "hero": {
+    "file": "showreel-loop.mp4",
+    "start": 3,
+    "duration": 14,
+    "mute": true,
+    "crf": 26
+  },
   "showreel": "https://vimeo.com/123456789",
-  "projects": ["szoboszlai.mp4", "fbc.mp4", "clark.mov", "market-epito.mp4"],
-  "social": ["reel-01.mp4", "reel-02.mp4", "reel-03.mp4", "reel-04.mp4", "reel-05.mp4"],
+  "projects": [
+    "szoboszlai.mp4",
+    "fbc.mp4",
+    "clark.mov",
+    "market-epito.mp4"
+  ],
+  "social": [
+    "reel-01.mp4",
+    "reel-02.mp4",
+    "reel-03.mp4",
+    "reel-04.mp4",
+    "reel-05.mp4"
+  ],
   "about": "kamera.jpg",
-  "services": ["reklamfilm.jpg", "social.jpg", "esemeny.jpg"],
-  "gallery": ["foto-01.jpg", "foto-02.jpg", "foto-03.jpg", "foto-04.jpg", "foto-05.jpg", "foto-06.jpg", "foto-07.jpg", "foto-08.jpg"],
+  "services": [
+    "reklamfilm.jpg",
+    "social.jpg",
+    "esemeny.jpg"
+  ],
+  "gallery": [
+    "foto-01.jpg",
+    "foto-02.jpg",
+    "foto-03.jpg",
+    "foto-04.jpg",
+    "foto-05.jpg",
+    "foto-06.jpg",
+    "foto-07.jpg",
+    "foto-08.jpg"
+  ],
   "testimonial": "al-habtoor.jpg",
   "cta": "forgatas.jpg"
 }

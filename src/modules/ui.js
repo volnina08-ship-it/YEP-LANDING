@@ -211,7 +211,7 @@ function initCursor() {
 
 /* ---------- service card "Tovább" → preselect the service in the form ---------- */
 function initPreselect() {
-  const select = document.querySelector('#quote-form select[name="service"]');
+  const select = document.querySelector('#quote-form [name="service"]');
   if (!select) return;
   document.querySelectorAll('[data-preselect]').forEach((a) => {
     a.addEventListener('click', () => { select.value = a.dataset.preselect; });

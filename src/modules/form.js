@@ -38,8 +38,11 @@ export function initForm({ config, lang }) {
   const validate = () => {
     const errors = [];
     const v = (n) => form.elements[n].value.trim();
-    if (v('name').length < 2) errors.push([form.elements.name, msgs.required]);
+    if (v('last_name').length < 2) errors.push([form.elements.last_name, msgs.required]);
+    if (v('first_name').length < 2) errors.push([form.elements.first_name, msgs.required]);
+    if (v('company').length < 2) errors.push([form.elements.company, msgs.required]);
     if (!EMAIL_RE.test(v('email'))) errors.push([form.elements.email, msgs.email]);
+    if (v('phone').replace(/\D/g, '').length < 6) errors.push([form.elements.phone, msgs.phone]);
     if (v('project_intro').length < 3) errors.push([form.elements.project_intro, msgs.required]);
     if (!form.elements.consent.checked) errors.push([form.elements.consent, msgs.consent]);
     return errors;
@@ -86,14 +89,14 @@ export function initForm({ config, lang }) {
 
     const v = (n) => form.elements[n].value.trim();
     const payload = {
-      name: v('name').slice(0, 120),
+      name: `${v('last_name')} ${v('first_name')}`.trim().slice(0, 120),
+      last_name: v('last_name').slice(0, 60),
+      first_name: v('first_name').slice(0, 60),
       email: v('email').slice(0, 254),
-      phone: v('phone').slice(0, 40) || null,
-      company: v('company').slice(0, 120) || null,
+      phone: v('phone').slice(0, 40),
+      company: v('company').slice(0, 120),
       service: v('service').slice(0, 80) || null,
-      budget: v('budget').slice(0, 80) || null,
       project_intro: v('project_intro').slice(0, 300),
-      message: v('message').slice(0, 3000) || null,
       consent: true,
       user_agent: navigator.userAgent.slice(0, 512),
       language: (navigator.language || '').slice(0, 16) || null,

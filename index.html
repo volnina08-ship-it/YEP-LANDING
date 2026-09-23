@@ -11,7 +11,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="YEP Content – Nagyobb történetek erősebb márkáknak." />
   <meta property="og:description" content="Reklámfilmek, kampányok és social content a koncepciótól a kész anyagig." />
-  <meta property="og:image" content="/media/placeholders/ph-hero-poster.jpg" />
+  <meta property="og:image" content="/media/video/mercar-tvc-edit-5-s0-d21.5-m.jpg" />
   <meta property="og:locale" content="hu_HU" />
 </head>
 <body>
@@ -118,6 +118,14 @@
         <div class="marquee__group"><span>More than content</span><i></i><span data-i18n="marquee.1">Reklámfilm</span><i></i><span data-i18n="marquee.2">Social content</span><i></i><span data-i18n="marquee.3">Események</span><i></i></div>
         <div class="marquee__group"><span>More than content</span><i></i><span data-i18n="marquee.1">Reklámfilm</span><i></i><span data-i18n="marquee.2">Social content</span><i></i><span data-i18n="marquee.3">Események</span><i></i></div>
         <div class="marquee__group"><span>More than content</span><i></i><span data-i18n="marquee.1">Reklámfilm</span><i></i><span data-i18n="marquee.2">Social content</span><i></i><span data-i18n="marquee.3">Események</span><i></i></div>
+      </div>
+    </div>
+
+    <!-- ================= CLIENT LOGOS ================= -->
+    <div class="clients" aria-label="Partnereink">
+      <div class="clients__track">
+        <div class="clients__group"><img src="/media/clients/bhs-trans.png" alt="BHS Trans" width="377" height="96" loading="lazy" /><img src="/media/clients/cupra.png" alt="Cupra" width="147" height="96" loading="lazy" /><img src="/media/clients/budapest-motors.png" alt="Budapest Motors" width="361" height="96" loading="lazy" /><img src="/media/clients/mercar.png" alt="Mercar" width="261" height="96" loading="lazy" /><img src="/media/clients/tchibo.png" alt="Tchibo" width="142" height="96" loading="lazy" /><img src="/media/clients/clark.png" alt="Clark Hotel" width="77" height="96" loading="lazy" /><img src="/media/clients/dunapack.png" alt="Dunapack Packaging" width="169" height="96" loading="lazy" /><img src="/media/clients/madame-tussauds.png" alt="Madame Tussauds Budapest" width="430" height="96" loading="lazy" /><img src="/media/clients/market.png" alt="Market Építő" width="248" height="96" loading="lazy" /><img src="/media/clients/mini.png" alt="MINI" width="216" height="96" loading="lazy" /><img src="/media/clients/seat.png" alt="SEAT" width="121" height="96" loading="lazy" /></div>
+        <div class="clients__group"><img src="/media/clients/bhs-trans.png" alt="BHS Trans" width="377" height="96" loading="lazy" /><img src="/media/clients/cupra.png" alt="Cupra" width="147" height="96" loading="lazy" /><img src="/media/clients/budapest-motors.png" alt="Budapest Motors" width="361" height="96" loading="lazy" /><img src="/media/clients/mercar.png" alt="Mercar" width="261" height="96" loading="lazy" /><img src="/media/clients/tchibo.png" alt="Tchibo" width="142" height="96" loading="lazy" /><img src="/media/clients/clark.png" alt="Clark Hotel" width="77" height="96" loading="lazy" /><img src="/media/clients/dunapack.png" alt="Dunapack Packaging" width="169" height="96" loading="lazy" /><img src="/media/clients/madame-tussauds.png" alt="Madame Tussauds Budapest" width="430" height="96" loading="lazy" /><img src="/media/clients/market.png" alt="Market Építő" width="248" height="96" loading="lazy" /><img src="/media/clients/mini.png" alt="MINI" width="216" height="96" loading="lazy" /><img src="/media/clients/seat.png" alt="SEAT" width="121" height="96" loading="lazy" /></div>
       </div>
     </div>
 
@@ -308,56 +316,35 @@
         <form class="form" id="quote-form" novalidate data-reveal>
           <div class="form__row">
             <label class="field">
-              <span class="field__label" data-i18n="form.name">Név *</span>
-              <input name="name" type="text" autocomplete="name" required minlength="2" maxlength="120" />
+              <span class="field__label" data-i18n="form.lastname">Vezetéknév *</span>
+              <input name="last_name" type="text" autocomplete="family-name" required minlength="2" maxlength="60" />
             </label>
             <label class="field">
-              <span class="field__label" data-i18n="form.email">E-mail *</span>
+              <span class="field__label" data-i18n="form.firstname">Keresztnév *</span>
+              <input name="first_name" type="text" autocomplete="given-name" required minlength="2" maxlength="60" />
+            </label>
+          </div>
+          <div class="form__row">
+            <label class="field">
+              <span class="field__label" data-i18n="form.company">Cégnév *</span>
+              <input name="company" type="text" autocomplete="organization" required minlength="2" maxlength="120" />
+            </label>
+            <label class="field">
+              <span class="field__label" data-i18n="form.email">Email *</span>
               <input name="email" type="email" autocomplete="email" required maxlength="254" />
             </label>
           </div>
           <div class="form__row">
             <label class="field">
-              <span class="field__label" data-i18n="form.phone">Telefonszám</span>
-              <input name="phone" type="tel" autocomplete="tel" maxlength="40" />
+              <span class="field__label" data-i18n="form.phone">Telefonszám *</span>
+              <input name="phone" type="tel" autocomplete="tel" required minlength="6" maxlength="40" />
             </label>
             <label class="field">
-              <span class="field__label" data-i18n="form.company">Cég / márka</span>
-              <input name="company" type="text" autocomplete="organization" maxlength="120" />
+              <span class="field__label" data-i18n="form.intro">Miről szól a projekt? *</span>
+              <input name="project_intro" type="text" required minlength="3" maxlength="300" data-i18n-ph="form.intro.ph" placeholder="Pl. imázsfilm egy új termékhez, október" />
             </label>
           </div>
-          <div class="form__row">
-            <label class="field field--select">
-              <span class="field__label" data-i18n="form.service">Milyen tartalom érdekel?</span>
-              <select name="service">
-                <option value="" data-i18n="form.service.0">Válassz…</option>
-                <option value="Reklámfilm & kampány" data-i18n="form.service.1">Reklámfilm &amp; kampány</option>
-                <option value="Social content" data-i18n="form.service.2">Social content</option>
-                <option value="Események" data-i18n="form.service.3">Események</option>
-                <option value="Fotózás" data-i18n="form.service.4">Fotózás</option>
-                <option value="Egyéb" data-i18n="form.service.5">Egyéb / még nem tudom</option>
-              </select>
-            </label>
-            <label class="field field--select">
-              <span class="field__label" data-i18n="form.budget">Tervezett keret</span>
-              <select name="budget">
-                <option value="" data-i18n="form.budget.0">Válassz…</option>
-                <option value="< 500e Ft">&lt; 500 ezer Ft</option>
-                <option value="500e – 1,5M Ft">500 ezer – 1,5 M Ft</option>
-                <option value="1,5M – 5M Ft">1,5 M – 5 M Ft</option>
-                <option value="5M+ Ft">5 M Ft felett</option>
-                <option value="Még nem tudom" data-i18n="form.budget.5">Még nem tudom</option>
-              </select>
-            </label>
-          </div>
-          <label class="field">
-            <span class="field__label" data-i18n="form.intro">Miről szól a projekt? *</span>
-            <input name="project_intro" type="text" required minlength="3" maxlength="300" data-i18n-ph="form.intro.ph" placeholder="Pl. 60 mp-es imázsfilm egy új prémium termékhez, októberi forgatással" />
-          </label>
-          <label class="field">
-            <span class="field__label" data-i18n="form.message">Üzenet</span>
-            <textarea name="message" rows="3" maxlength="3000" data-i18n-ph="form.message.ph" placeholder="Bármi, amit még fontosnak tartasz: határidő, platformok, referenciák…"></textarea>
-          </label>
+          <input type="hidden" name="service" value="" />
           <!-- honeypot -->
           <label class="hp" aria-hidden="true"><input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
 

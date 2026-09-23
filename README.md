@@ -15,33 +15,41 @@ npm run preview    # a build megtekintése
 
 Deploy: bármilyen statikus hoszt (Vercel, Netlify, Cloudflare Pages). Build parancs `npm run build`, kimeneti mappa `dist`.
 
-## Média – a Dropbox referenciák beemelése
+## Média – a Dropbox referenciák
 
-Az oldal most generált, sötét **placeholder** képekkel és loopokkal fut (`public/media/placeholders`). A valódi anyagok beemelése két parancs:
+Az oldal a Dropbox referencia-mappából válogatott, webre optimalizált anyagokkal fut (`public/media/video`, `public/media/photo`). A kiosztást a `public/media/media.map.json` írja le, ezt szerkesztve cserélhető bármelyik slot.
+
+| Slot | Forrás (Dropbox) |
+| --- | --- |
+| Hero háttérloop | `MERCAR_TVC_edit_5.mp4` első 21,5 mp, némítva |
+| Showreel (modal) | `KIEG/UJ NYERS/yep showreel.mov` |
+| Projekt: Dominik Szoboszlai | `Sport/2023_11_19_Szoboszlai_EB_v3.mov` (álló) |
+| Projekt: FBC | `Restaurant/domPerignon_product_v2.mp4` (álló) – cserélendő, ha van FBC-anyag |
+| Projekt: Clark | `Documentary/Kimpton - Trailer 1st Episode - v5.mp4` – cserélendő a Clark-filmre |
+| Projekt: Market Építő | `Construction:Interior/BudaPart projekt.mov` |
+| Social csík (5) | Cupra 9:16, Bigfish vertical, TikTok (3), million roses, Szoboszlai díjátadó – 20 mp-es némított részletek |
+| Rólunk / CTA | `KIEG/YEP BTS` werkfotók |
+| Vélemény | `PHOTOS/Image/JodokCello_YepContent-88.jpg` (Al Habtoor lépcső) |
+| Szolgáltatások, galéria | `PHOTOS/Cars`, `Product`, `Events`, `Hotel`, `Image`, `Restaurants`, `Architect` válogatás |
+| Partner logók | `KIEG/Ref logók` fehér monokróm változatban (`public/media/clients`) |
+
+Újrafuttatás / csere:
 
 ```bash
-npm run media:fetch   # letölti és kicsomagolja a Dropbox mappát → public/media/source
-npm run media         # ffmpeg: webre optimalizál + slotok kiosztása + src/media.manifest.json
+npm run media:fetch   # a teljes Dropbox mappa letöltése (kb. 17 GB!) – vagy csak a kellő fájlokat másold a public/media/source alá
+npm run media         # ffmpeg: csak a media.map.json-ban kiosztott fájlokat kódolja, majd frissíti a src/media.manifest.json-t
 ```
 
 Feltétel: `ffmpeg` és `ffprobe` a gépen (macOS: `brew install ffmpeg`).
 
-Mit csinál a `npm run media`?
-
-- videó → h264 mp4, max 1080p, `faststart`, hang megtartva, poszter jpg (`public/media/video/`)
-- fotó → jpg, max 2000 px (`public/media/photo/`)
-- fekvő videók sorrendben: **hero**, **showreel**, majd a 4 **projekt**; álló (9:16) videók: **social** csík
-- álló fotók: **rólunk**, **vélemény**; fekvő fotók: **szolgáltatás** kártyák, **CTA**; a maradék a **galériába**
-- amire nem jut anyag, ott marad a placeholder
-
-Kézi kiosztás: nevezd át a `public/media/media.map.example.json` fájlt `media.map.json`-ra és írd bele a fájlneveket. Videó slotnál **YouTube/Vimeo URL** is adható (a modal beágyazva játssza le). Nagy videókat érdemes külső tárhelyre tenni (Supabase Storage, R2, Bunny) – a manifestben abszolút URL is használható.
+A `media.map.json` videó bejegyzése lehet fájlnév, YouTube/Vimeo URL, vagy objektum: `{"file": "x.mp4", "start": 3, "duration": 15, "mute": true, "crf": 26, "maxHeight": 1080}` (vágás másodpercben, némítás, minőség). Amire nem jut anyag, ott a `public/media/placeholders` generált képei maradnak.
 
 ## Ajánlatkérő űrlap – Supabase
 
 - Projekt: `https://qelmzmzpicsdaiagitsa.supabase.co`, tábla: `public.quote_requests`
 - Séma és RLS: `supabase/migrations/0001_quote_requests.sql` (a projektre már alkalmazva)
 - A publikus kulcs csak **beszúrni** tud (RLS), olvasni a Supabase dashboardon (Table Editor) vagy bejelentkezett felhasználóként lehet
-- Mezők: név, e-mail, telefon, cég, érdeklődés (select), keret (select), **projekt bevezető (1 sor)**, üzenet, hozzájárulás
+- Mezők a referencia oldal űrlapjával megegyezően: vezetéknév, keresztnév, cégnév, email, telefonszám (mind kötelező) + **projekt bevezető (1 sor)**, hozzájárulás; a szolgáltatás-kártyák „Tovább” linkje rejtett mezőben elmenti, melyik kártyáról jött a lead
 - Automatikusan mentett attribúció: `utm_*`, `gclid`, `fbclid`, forrás URL, referrer, nyelv, user agent
 - `status` oszlop a belső követéshez: `new → contacted → quoted → won / lost`
 - Spam ellen: honeypot mező + DB-szintű ellenőrzések (hossz, e-mail formátum)

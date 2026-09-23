@@ -1,0 +1,57 @@
+[
+ {
+  "slug": "bhs-trans",
+  "name": "BHS Trans",
+  "w": 377
+ },
+ {
+  "slug": "cupra",
+  "name": "Cupra",
+  "w": 147
+ },
+ {
+  "slug": "budapest-motors",
+  "name": "Budapest Motors",
+  "w": 361
+ },
+ {
+  "slug": "mercar",
+  "name": "Mercar",
+  "w": 261
+ },
+ {
+  "slug": "tchibo",
+  "name": "Tchibo",
+  "w": 142
+ },
+ {
+  "slug": "clark",
+  "name": "Clark Hotel",
+  "w": 77
+ },
+ {
+  "slug": "dunapack",
+  "name": "Dunapack Packaging",
+  "w": 169
+ },
+ {
+  "slug": "madame-tussauds",
+  "name": "Madame Tussauds Budapest",
+  "w": 430
+ },
+ {
+  "slug": "market",
+  "name": "Market Építő",
+  "w": 248
+ },
+ {
+  "slug": "mini",
+  "name": "MINI",
+  "w": 216
+ },
+ {
+  "slug": "seat",
+  "name": "SEAT",
+  "w": 121
+ }
+]
