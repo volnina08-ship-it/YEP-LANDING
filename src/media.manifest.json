@@ -1,35 +1,127 @@
 {
-  "hero": { "video": "/media/placeholders/ph-hero-loop.mp4", "poster": "/media/placeholders/ph-hero-poster.jpg" },
-  "showreel": { "video": "/media/placeholders/ph-hero-loop.mp4", "poster": "/media/placeholders/ph-showreel.jpg", "url": "", "title": "Showreel" },
-  "about": { "image": "/media/placeholders/ph-about.jpg" },
+  "hero": {
+    "video": "/media/video/mercar-tvc-edit-5-s0-d21.5-m.mp4",
+    "poster": "/media/video/mercar-tvc-edit-5-s0-d21.5-m.jpg",
+    "portrait": false,
+    "url": ""
+  },
+  "showreel": {
+    "video": "/media/video/yep-showreel.mp4",
+    "poster": "/media/video/yep-showreel.jpg",
+    "url": "",
+    "title": "Showreel",
+    "portrait": false
+  },
+  "about": {
+    "image": "/media/photo/img-8497.jpg"
+  },
   "services": [
-    { "image": "/media/placeholders/ph-service-01.jpg" },
-    { "image": "/media/placeholders/ph-service-02.jpg" },
-    { "image": "/media/placeholders/ph-service-03.jpg" }
+    {
+      "image": "/media/photo/9h3a8651-edit.jpg"
+    },
+    {
+      "image": "/media/photo/vrp-7873.jpg"
+    },
+    {
+      "image": "/media/photo/1cbfe494-da8b-49c5-abcc-cf84a3b47612-rw-3840.jpg"
+    }
   ],
   "social": [
-    { "video": "/media/placeholders/ph-social-01.mp4", "poster": "/media/placeholders/ph-social-01.jpg" },
-    { "video": "/media/placeholders/ph-social-02.mp4", "poster": "/media/placeholders/ph-social-02.jpg" },
-    { "video": "/media/placeholders/ph-social-03.mp4", "poster": "/media/placeholders/ph-social-03.jpg" },
-    { "video": "/media/placeholders/ph-social-04.mp4", "poster": "/media/placeholders/ph-social-04.jpg" },
-    { "video": "/media/placeholders/ph-social-05.mp4", "poster": "/media/placeholders/ph-social-05.jpg" }
+    {
+      "video": "/media/video/stadium-x-cupra-final-01-9-16-mp4-s1-d20-m.mp4",
+      "poster": "/media/video/stadium-x-cupra-final-01-9-16-mp4-s1-d20-m.jpg",
+      "portrait": true,
+      "url": ""
+    },
+    {
+      "video": "/media/video/2023-12-20-bigfish-long-v5-vertical-mp4-s2-d20-m.mp4",
+      "poster": "/media/video/2023-12-20-bigfish-long-v5-vertical-mp4-s2-d20-m.jpg",
+      "portrait": true,
+      "url": ""
+    },
+    {
+      "video": "/media/video/video-2026-02-11-10-01-51-3-s0-d20-m.mp4",
+      "poster": "/media/video/video-2026-02-11-10-01-51-3-s0-d20-m.jpg",
+      "portrait": true,
+      "url": ""
+    },
+    {
+      "video": "/media/video/million-roses-s3-d20-m.mp4",
+      "poster": "/media/video/million-roses-s3-d20-m.jpg",
+      "portrait": true,
+      "url": ""
+    },
+    {
+      "video": "/media/video/szoboszlai-dijatado-03-mp4-s5-d20-m.mp4",
+      "poster": "/media/video/szoboszlai-dijatado-03-mp4-s5-d20-m.jpg",
+      "portrait": true,
+      "url": ""
+    }
   ],
   "projects": [
-    { "video": "/media/placeholders/ph-project-01.mp4", "poster": "/media/placeholders/ph-project-01.jpg", "url": "", "title": "Dominik Szoboszlai", "sub": "Kampányfilm" },
-    { "video": "/media/placeholders/ph-project-02.mp4", "poster": "/media/placeholders/ph-project-02.jpg", "url": "", "title": "FBC", "sub": "Kampány" },
-    { "video": "/media/placeholders/ph-project-03.mp4", "poster": "/media/placeholders/ph-project-03.jpg", "url": "", "title": "Clark", "sub": "1 órás dokumentumfilm" },
-    { "video": "/media/placeholders/ph-project-04.mp4", "poster": "/media/placeholders/ph-project-04.jpg", "url": "", "title": "Market Építő", "sub": "Kampány" }
+    {
+      "video": "/media/video/2023-11-19-szoboszlai-eb-v3.mp4",
+      "poster": "/media/video/2023-11-19-szoboszlai-eb-v3.jpg",
+      "url": "",
+      "title": "Dominik Szoboszlai",
+      "sub": "Kampányfilm",
+      "portrait": true
+    },
+    {
+      "video": "/media/video/domperignon-product-v2.mp4",
+      "poster": "/media/video/domperignon-product-v2.jpg",
+      "url": "",
+      "title": "FBC",
+      "sub": "Kampány",
+      "portrait": true
+    },
+    {
+      "video": "/media/video/kimpton-trailer-1st-episode-v5.mp4",
+      "poster": "/media/video/kimpton-trailer-1st-episode-v5.jpg",
+      "url": "",
+      "title": "Clark",
+      "sub": "1 órás dokumentumfilm",
+      "portrait": false
+    },
+    {
+      "video": "/media/video/budapart-projekt.mp4",
+      "poster": "/media/video/budapart-projekt.jpg",
+      "url": "",
+      "title": "Market Építő",
+      "sub": "Kampány",
+      "portrait": false
+    }
   ],
   "gallery": [
-    { "image": "/media/placeholders/ph-gallery-01.jpg" },
-    { "image": "/media/placeholders/ph-gallery-02.jpg" },
-    { "image": "/media/placeholders/ph-gallery-03.jpg" },
-    { "image": "/media/placeholders/ph-gallery-04.jpg" },
-    { "image": "/media/placeholders/ph-gallery-05.jpg" },
-    { "image": "/media/placeholders/ph-gallery-06.jpg" },
-    { "image": "/media/placeholders/ph-gallery-07.jpg" },
-    { "image": "/media/placeholders/ph-gallery-08.jpg" }
+    {
+      "image": "/media/photo/avalon-yep-52.jpg"
+    },
+    {
+      "image": "/media/photo/bal09190.jpg"
+    },
+    {
+      "image": "/media/photo/vrp-9214.jpg"
+    },
+    {
+      "image": "/media/photo/tommy-3296.jpg"
+    },
+    {
+      "image": "/media/photo/yep-9292.jpg"
+    },
+    {
+      "image": "/media/photo/bjp-4518-2.jpg"
+    },
+    {
+      "image": "/media/photo/jodokcello-yepcontent-76.jpg"
+    },
+    {
+      "image": "/media/photo/bw-3288.jpg"
+    }
   ],
-  "testimonial": { "image": "/media/placeholders/ph-testimonial.jpg" },
-  "cta": { "image": "/media/placeholders/ph-cta.jpg" }
+  "testimonial": {
+    "image": "/media/photo/jodokcello-yepcontent-88.jpg"
+  },
+  "cta": {
+    "image": "/media/photo/img-3628-3.jpg"
+  }
 }
