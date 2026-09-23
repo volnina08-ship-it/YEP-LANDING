@@ -79,6 +79,6 @@ public/logo.svg            – a kézírásos YEP logó (SVG path, bármikor cse
 
 ## Megjegyzések
 
-- A logó a design alapján újrarajzolt vektor; ha megvan az eredeti SVG/PNG, elég a `public/logo.svg` cseréje (fehér, átlátszó háttér).
+- A logó a yepcontent.info logójából vektorizált SVG: `public/logo.svg` (teljes, „YEP! Content Production”), `public/logo-mark.svg` (csak a sárga „YEP!”, navigáció és vízjel), `public/favicon.svg`.
 - A hero két gombja a brief szerint: „Ajánlatot kérek” (űrlap) és „További info” (görget). Az „Időpontot foglalok” / „E-mail árajánlatot kérek” gombpár a fejlécben és a CTA szekcióban van.
 - A mozgás szándékosan visszafogott: csak szöveg-, szekció- és scroll-alapú animációk vannak, a videók nem mozognak.

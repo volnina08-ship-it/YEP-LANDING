@@ -137,7 +137,7 @@ function sectionMoments() {
   // CTA watermark fades in
   const wm = $('.watermark');
   if (wm) {
-    gsap.to(wm, { opacity: 1, duration: 1.6, ease: 'power2.out', scrollTrigger: { trigger: '.cta', start: 'top 70%', once: true } });
+    gsap.to(wm, { opacity: 0.045, duration: 1.6, ease: 'power2.out', scrollTrigger: { trigger: '.cta', start: 'top 70%', once: true } });
   }
 
   // hairline rules (section tops) draw in
@@ -158,7 +158,8 @@ function revealEverything() {
   gsap.set('#loader', { display: 'none' });
   gsap.set('.hero__video', { opacity: 1, scale: 1 });
   gsap.set('.hero__title .line__in', { yPercent: 0 });
-  gsap.set('[data-hero], [data-reveal], #nav, .watermark', { opacity: 1, clearProps: 'transform,clipPath' });
+  gsap.set('[data-hero], [data-reveal], #nav', { opacity: 1, clearProps: 'transform,clipPath' });
+  gsap.set('.watermark', { opacity: 0.045 });
   gsap.set('.quote__wipe', { scaleY: 0 });
   $$('.count').forEach((el) => { el.textContent = el.dataset.count; });
 }
