@@ -10,7 +10,8 @@
   "projects": [
     {
       "file": "2023_11_19_Szoboszlai_EB_v3.mov",
-      "crf": 25
+      "crf": 27,
+      "maxHeight": 810
     },
     {
       "file": "domPerignon_product_v2.mp4",
@@ -18,11 +19,11 @@
     },
     {
       "file": "Kimpton - Trailer 1st Episode - v5.mp4",
-      "crf": 24
+      "crf": 26
     },
     {
       "file": "BudaPart projekt.mov",
-      "crf": 25
+      "crf": 27
     }
   ],
   "social": [
