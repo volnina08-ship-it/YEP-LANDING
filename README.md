@@ -50,9 +50,9 @@ A logó a `public/logo.svg` vektoraiból ecsetvonásonként „festődik fel” 
 
 | Érték | Név | Mit csinál |
 | --- | --- | --- |
-| `classic` | Logó + csík | A korábbi egyszerű betöltő (jelenleg ez él) |
+| `classic` | Logó + csík | A korábbi egyszerű betöltő |
 | `brush` (1) | Ecsetvonás | Tiszta, irányított vonások olvasási sorrendben |
-| `dry` (2) | Száraz ecset | Tépett szélek, külön bepattanó fröccsenések, a végén „megszárad” a festék |
+| `dry` (2) | Száraz ecset | **Ez él.** Tépett szélek, külön bepattanó fröccsenések, a végén „megszárad” a festék |
 | `sketch` (3) | Skicc + festés | Vékony kontúr rajzolódik végig, aztán vonásonként telik fel |
 
 Előnézet: `/loader-preview.html` (mindhárom egymás mellett, újrajátszás, lassítás), vagy a főoldalon `/?loader=1`, `/?loader=2`, `/?loader=3` (ez a session-memóriától függetlenül mindig lejátssza).

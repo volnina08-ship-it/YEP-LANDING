@@ -6,7 +6,7 @@ export const config = {
   table: 'quote_requests',
 
   // Betöltő animáció: 'classic' (logó + csík) | 'brush' (1) | 'dry' (2) | 'sketch' (3). Előnézet: /loader-preview.html vagy /?loader=1|2|3
-  loader: 'classic',
+  loader: 'dry',
 
   // Időpontfoglaló link (pl. Calendly). Ha üres, az „Időpontot foglalok” gombok az ajánlatkérő űrlapra görgetnek.
   bookingUrl: import.meta.env.VITE_BOOKING_URL || '',
