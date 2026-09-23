@@ -13,14 +13,8 @@
       "crf": 27,
       "maxHeight": 810
     },
-    {
-      "file": "domPerignon_product_v2.mp4",
-      "crf": 24
-    },
-    {
-      "file": "Kimpton - Trailer 1st Episode - v5.mp4",
-      "crf": 26
-    },
+    null,
+    null,
     {
       "file": "BudaPart projekt.mov",
       "crf": 27
@@ -85,5 +79,6 @@
     "bw-3288.jpg"
   ],
   "testimonial": "JodokCello_YepContent-88.jpg",
-  "cta": "IMG_3628 3.jpg"
+  "cta": "IMG_3628 3.jpg",
+  "_comment": "Videó slot: fájlnév, YouTube/Vimeo URL, objektum ({file,start,duration,mute,crf,maxHeight}) vagy null = sárga „Videó kell” placeholder az oldalon."
 }

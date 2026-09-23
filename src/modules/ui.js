@@ -150,7 +150,7 @@ function initModal(msgs) {
 
   const open = (key, trigger) => {
     const entry = getMedia(key);
-    if (!entry) return;
+    if (!entry || entry.todo) return;
     lastFocus = trigger;
     player.innerHTML = '';
     player.classList.toggle('is-portrait', entry.portrait === true);

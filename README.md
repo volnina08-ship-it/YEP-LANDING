@@ -24,8 +24,8 @@ Az oldal a Dropbox referencia-mappából válogatott, webre optimalizált anyago
 | Hero háttérloop | `MERCAR_TVC_edit_5.mp4` első 21,5 mp, némítva |
 | Showreel (modal) | `KIEG/UJ NYERS/yep showreel.mov` |
 | Projekt: Dominik Szoboszlai | `Sport/2023_11_19_Szoboszlai_EB_v3.mov` (álló) |
-| Projekt: FBC | `Restaurant/domPerignon_product_v2.mp4` (álló) – cserélendő, ha van FBC-anyag |
-| Projekt: Clark | `Documentary/Kimpton - Trailer 1st Episode - v5.mp4` – cserélendő a Clark-filmre |
+| Projekt: FBC | **„Videó kell”** csempe – nincs FBC-anyag a mappában |
+| Projekt: Clark | **„Videó kell”** csempe – nincs Clark-film a mappában |
 | Projekt: Market Építő | `Construction:Interior/BudaPart projekt.mov` |
 | Social csík (5) | Cupra 9:16, Bigfish vertical, TikTok (3), million roses, Szoboszlai díjátadó – 20 mp-es némított részletek |
 | Rólunk / CTA | `KIEG/YEP BTS` werkfotók |
@@ -36,13 +36,26 @@ Az oldal a Dropbox referencia-mappából válogatott, webre optimalizált anyago
 Újrafuttatás / csere:
 
 ```bash
-npm run media:fetch   # a teljes Dropbox mappa letöltése (kb. 17 GB!) – vagy csak a kellő fájlokat másold a public/media/source alá
+npm run media:fetch   # a teljes Dropbox mappa letöltése (kb. 17 GB!) – vagy csak a kellő fájlokat másold a media-source mappába (repo gyökér)
 npm run media         # ffmpeg: csak a media.map.json-ban kiosztott fájlokat kódolja, majd frissíti a src/media.manifest.json-t
 ```
 
 Feltétel: `ffmpeg` és `ffprobe` a gépen (macOS: `brew install ffmpeg`).
 
-A `media.map.json` videó bejegyzése lehet fájlnév, YouTube/Vimeo URL, vagy objektum: `{"file": "x.mp4", "start": 3, "duration": 15, "mute": true, "crf": 26, "maxHeight": 1080}` (vágás másodpercben, némítás, minőség). Amire nem jut anyag, ott a `public/media/placeholders` generált képei maradnak.
+A `media.map.json` videó bejegyzése lehet fájlnév, YouTube/Vimeo URL, objektum: `{"file": "x.mp4", "start": 3, "duration": 15, "mute": true, "crf": 26, "maxHeight": 1080}` (vágás másodpercben, némítás, minőség), vagy `null` = sárga **„Videó kell”** csempe jelenik meg a slot helyén (a kártya nem nyit lejátszót). Jelenleg az FBC és a Clark projekt ilyen: ha megjön az anyaguk, írd be a fájlnevet és futtasd az `npm run media`-t.
+
+## Betöltő animáció – a felfestődő logó
+
+A logó a `public/logo.svg` vektoraiból ecsetvonásonként „festődik fel” (`src/modules/loader.js`, adatok: `src/logo-data.js`). Három változat van, a `src/config.js` `loader` mezője választ:
+
+| Érték | Név | Mit csinál |
+| --- | --- | --- |
+| `classic` | Logó + csík | A korábbi egyszerű betöltő (jelenleg ez él) |
+| `brush` (1) | Ecsetvonás | Tiszta, irányított vonások olvasási sorrendben |
+| `dry` (2) | Száraz ecset | Tépett szélek, külön bepattanó fröccsenések, a végén „megszárad” a festék |
+| `sketch` (3) | Skicc + festés | Vékony kontúr rajzolódik végig, aztán vonásonként telik fel |
+
+Előnézet: `/loader-preview.html` (mindhárom egymás mellett, újrajátszás, lassítás), vagy a főoldalon `/?loader=1`, `/?loader=2`, `/?loader=3` (ez a session-memóriától függetlenül mindig lejátssza).
 
 ## Ajánlatkérő űrlap – Supabase
 

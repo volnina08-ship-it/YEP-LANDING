@@ -2,7 +2,7 @@
 /**
  * YEP Content – média pipeline
  *
- *  1) Tedd a Dropbox-ból letöltött fájlokat a public/media/source mappába
+ *  1) Tedd a Dropbox-ból letöltött fájlokat a media-source mappába (a repo gyökerében)
  *     (vagy futtasd: npm run media:fetch – ez letölti és kicsomagolja a megosztott mappát)
  *  2) npm run media
  *       → ffmpeg-gel webre optimalizál: videó h264 mp4 (max 1080p, faststart) + poszter jpg,
@@ -19,7 +19,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-const SRC = path.join(ROOT, 'public/media/source');
+const SRC = path.join(ROOT, 'media-source');
 const OUT_VIDEO = path.join(ROOT, 'public/media/video');
 const OUT_PHOTO = path.join(ROOT, 'public/media/photo');
 const BASE_MANIFEST = path.join(ROOT, 'public/media/placeholders/manifest.json');
@@ -174,6 +174,7 @@ const takePhoto = (pref) => {
 };
 const setVideo = (slot, target, item, from) => {
   if (!item) return;
+  delete target.todo;
   if (isUrl(item)) { target.url = item; report.push([slot, item, from]); return; }
   if (!item.video) Object.assign(item, encodeVideo(item.src, item.slug, item.info));
   Object.assign(target, { video: item.video, poster: item.poster, portrait: item.portrait, url: '' });
@@ -201,8 +202,10 @@ const mapVideo = (v) => {
 const mapPhoto = (p) => findByName(photos, p);
 if (map.hero) setVideo('hero', manifest.hero, mapVideo(map.hero), 'map');
 if (map.showreel) setVideo('showreel', manifest.showreel, mapVideo(map.showreel), 'map');
-(map.projects || []).forEach((v, i) => { if (v && manifest.projects[i]) setVideo(`projects[${i}]`, manifest.projects[i], mapVideo(v), 'map'); });
-(map.social || []).forEach((v, i) => { if (v && manifest.social[i]) setVideo(`social[${i}]`, manifest.social[i], mapVideo(v), 'map'); });
+// null a térképben = szándékosan üres slot: sárga „Videó kell” elem jelenik meg az oldalon, nincs automatikus kiosztás
+const setTodo = (slot, target) => { Object.assign(target, { video: null, poster: null, url: '', todo: true }); report.push([slot, '(videó kell – sárga placeholder)', 'map']); };
+(map.projects || []).forEach((v, i) => { if (!manifest.projects[i]) return; if (v === null) setTodo(`projects[${i}]`, manifest.projects[i]); else if (v) setVideo(`projects[${i}]`, manifest.projects[i], mapVideo(v), 'map'); });
+(map.social || []).forEach((v, i) => { if (!manifest.social[i]) return; if (v === null) setTodo(`social[${i}]`, manifest.social[i]); else if (v) setVideo(`social[${i}]`, manifest.social[i], mapVideo(v), 'map'); });
 if (map.about) setPhoto('about', manifest.about, mapPhoto(map.about), 'map');
 if (map.testimonial) setPhoto('testimonial', manifest.testimonial, mapPhoto(map.testimonial), 'map');
 if (map.cta) setPhoto('cta', manifest.cta, mapPhoto(map.cta), 'map');

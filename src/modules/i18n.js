@@ -45,6 +45,7 @@ export const MESSAGES = {
     sending: 'Küldés…',
     error: 'Hiba történt a küldés közben. Próbáld újra, vagy írj nekünk:',
     showreel: 'Showreel',
+    todoVideo: 'Videó kell',
   },
   en: {
     required: 'Please fill in this field.',
@@ -54,6 +55,7 @@ export const MESSAGES = {
     sending: 'Sending…',
     error: 'Something went wrong. Please try again or e-mail us:',
     showreel: 'Showreel',
+    todoVideo: 'Video needed',
   },
 };
 

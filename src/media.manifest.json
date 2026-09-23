@@ -68,20 +68,20 @@
       "portrait": true
     },
     {
-      "video": "/media/video/domperignon-product-v2.mp4",
-      "poster": "/media/video/domperignon-product-v2.jpg",
+      "video": null,
+      "poster": null,
       "url": "",
       "title": "FBC",
       "sub": "Kampány",
-      "portrait": true
+      "todo": true
     },
     {
-      "video": "/media/video/kimpton-trailer-1st-episode-v5.mp4",
-      "poster": "/media/video/kimpton-trailer-1st-episode-v5.jpg",
+      "video": null,
+      "poster": null,
       "url": "",
       "title": "Clark",
       "sub": "1 órás dokumentumfilm",
-      "portrait": false
+      "todo": true
     },
     {
       "video": "/media/video/budapart-projekt.mp4",

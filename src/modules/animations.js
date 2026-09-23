@@ -1,6 +1,8 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
+import { config } from '../config.js';
+import { mountLogo, logoTimeline, LOADER_VARIANTS } from './loader.js';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 ScrollTrigger.config({ ignoreMobileResize: true });
@@ -31,17 +33,37 @@ export async function initAnimations() {
 }
 
 /* ---------- preloader + hero intro ---------- */
+// melyik betöltő fusson: ?loader=1|2|3 (vagy a név) felülírja a config.loader beállítást, és mindig lejátssza
+function loaderVariant() {
+  const q = new URLSearchParams(location.search).get('loader');
+  if (q) {
+    const byNum = LOADER_VARIANTS[Number(q) - 1];
+    if (byNum) return byNum;
+    if (LOADER_VARIANTS.includes(q)) return q;
+  }
+  return LOADER_VARIANTS.includes(config.loader) ? config.loader : 'classic';
+}
+
 function intro() {
   const loader = $('#loader');
+  const variant = loaderVariant();
+  const forced = new URLSearchParams(location.search).has('loader');
   const seen = (() => { try { return sessionStorage.getItem('yep-seen') === '1'; } catch (_) { return false; } })();
   try { sessionStorage.setItem('yep-seen', '1'); } catch (_) { /* noop */ }
+  const play = !seen || forced;
 
   gsap.set('.hero__title .line__in', { yPercent: 112 });
   gsap.set('.hero__video', { opacity: 0, scale: 1.06, transformOrigin: '50% 50%' });
 
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-  if (!seen) {
+  if (play && variant !== 'classic') {
+    loader.classList.add('is-paint');
+    const mount = mountLogo($('#loader-mark'), variant);
+    tl.add(logoTimeline(mount, { paused: false }))
+      .to(loader, { yPercent: -100, duration: 0.95, ease: 'expo.inOut' }, '+=0.3')
+      .set(loader, { display: 'none' });
+  } else if (play) {
     tl.to('.loader__logo img', { opacity: 1, duration: 0.7, ease: 'power2.out' })
       .to('.loader__bar span', { scaleX: 1, duration: 1.0, ease: 'power3.inOut' }, '-=0.35')
       .to('.loader__logo img', { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in' }, '+=0.1')
@@ -51,7 +73,7 @@ function intro() {
     tl.to(loader, { opacity: 0, duration: 0.35 }).set(loader, { display: 'none' });
   }
 
-  tl.to('.hero__video', { opacity: 1, scale: 1, duration: 1.8, ease: 'power2.out' }, seen ? '<' : '-=0.75')
+  tl.to('.hero__video', { opacity: 1, scale: 1, duration: 1.8, ease: 'power2.out' }, play ? '-=0.75' : '<')
     .from('[data-hero="eyebrow"]', { y: 18, opacity: 0, duration: 0.8 }, '<+0.15')
     .to('.hero__title .line__in', { yPercent: 0, duration: 1.15, ease: 'expo.out', stagger: 0.09 }, '<+0.05')
     .from('[data-hero="lead"]', { y: 22, opacity: 0, duration: 0.9 }, '<+0.4')

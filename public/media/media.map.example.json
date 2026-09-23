@@ -1,5 +1,5 @@
 {
-  "_comment": "Nevezd át media.map.json-ra. Fájlnév = a public/media/source mappában lévő fájl neve (almappa nélkül is jó). Videó slotnál YouTube/Vimeo URL is megadható, vagy objektum: {\"file\": \"x.mp4\", \"start\": 5, \"duration\": 12, \"mute\": true, \"crf\": 26} (vágás mp-ben, némítás).",
+  "_comment": "Nevezd át media.map.json-ra. Fájlnév = a media-source mappában (repo gyökér) lévő fájl neve (almappa nélkül is jó). Videó slotnál YouTube/Vimeo URL is megadható, vagy objektum: {\"file\": \"x.mp4\", \"start\": 5, \"duration\": 12, \"mute\": true, \"crf\": 26} (vágás mp-ben, némítás).",
   "hero": {
     "file": "showreel-loop.mp4",
     "start": 3,

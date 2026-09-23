@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>YEP! betöltő animáció – 3 verzió</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <style>
+    :root { --bg: #0a0a0a; --fg: #f4f2ed; --dim: #b5b3ae; --muted: #8a8884; --line: rgba(255,255,255,0.1); --yellow: #fdde28; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: 'Sora Variable', 'Sora', system-ui, sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased; padding: clamp(20px, 4vw, 56px) clamp(16px, 4.5vw, 72px) 60px; }
+    h1, h2, p { margin: 0; }
+    .top { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(24px, 3vw, 40px); }
+    .eyebrow { color: var(--yellow); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 10px; }
+    h1 { font-size: clamp(26px, 3.4vw, 44px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
+    .hint { color: var(--dim); font-size: 15px; margin-top: 10px; max-width: 60ch; }
+    .controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+    .seg button, .btn { appearance: none; border: 0; background: transparent; color: var(--dim); font: inherit; font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 16px; cursor: pointer; transition: background 0.25s, color 0.25s; }
+    .seg button.is-on { background: var(--fg); color: #0a0a0a; }
+    .btn { border: 1px solid var(--line); border-radius: 999px; color: var(--fg); }
+    .btn:hover { background: var(--yellow); color: #0a0a0a; border-color: var(--yellow); }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); }
+    @media (max-width: 960px) { .grid { grid-template-columns: 1fr; max-width: 640px; } }
+    .card { display: grid; gap: 14px; align-content: start; }
+    .screen { position: relative; aspect-ratio: 16 / 10; display: grid; place-items: center; background: #0a0a0a; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; transition: border-color 0.3s; overflow: hidden; }
+    .screen:hover { border-color: rgba(255,255,255,0.3); }
+    .screen::after { content: '↻ újra'; position: absolute; right: 12px; bottom: 10px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); opacity: 0; transition: opacity 0.3s; }
+    .screen:hover::after { opacity: 1; }
+    .tag { position: absolute; left: 12px; top: 10px; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: var(--yellow); color: #0a0a0a; font-size: 12px; font-weight: 800; }
+    .mount { width: 62%; }
+    .mount svg { display: block; width: 100%; height: auto; overflow: visible; }
+    h2 { font-size: 18px; font-weight: 800; letter-spacing: -0.01em; }
+    h2 span { color: var(--yellow); }
+    .card p { color: var(--dim); font-size: 14.5px; }
+    .foot { margin-top: clamp(28px, 4vw, 48px); padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13.5px; }
+    .foot a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div>
+      <p class="eyebrow">Betöltő animáció</p>
+      <h1>A logó felfestődik – 3 verzió</h1>
+      <p class="hint">Kattints egy kártyára az újrajátszáshoz. Lassítva is megnézheted. Élesben a kiválasztott verzió után a fekete függöny felcsúszik, és jön a hero.</p>
+    </div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Sebesség">
+        <button type="button" data-speed="1" class="is-on">1×</button>
+        <button type="button" data-speed="0.5">0,5×</button>
+        <button type="button" data-speed="0.25">0,25×</button>
+      </div>
+      <button class="btn" type="button" id="replay-all">Mind újra ↻</button>
+    </div>
+  </header>
+
+  <main class="grid">
+    <article class="card" data-variant="brush">
+      <div class="screen" role="button" tabindex="0" aria-label="1. verzió lejátszása"><span class="tag">1</span><div class="mount"></div></div>
+      <h2><span>1</span> · Ecsetvonás</h2>
+      <p>Tiszta, irányított ecsetvonások olvasási sorrendben: az Y száraitól a felkiáltójel pontjáig, végül a felirat. Feszes, gyors – kb. 2 mp.</p>
+    </article>
+    <article class="card" data-variant="dry">
+      <div class="screen" role="button" tabindex="0" aria-label="2. verzió lejátszása"><span class="tag">2</span><div class="mount"></div></div>
+      <h2><span>2</span> · Száraz ecset</h2>
+      <p>Tépett, szakadozott szélű vonások, a fröccsenések külön pattannak be ott, ahol az ecset jár, a végén a festék „megszárad” a márkasárgára. Kb. 2,2 mp.</p>
+    </article>
+    <article class="card" data-variant="sketch">
+      <div class="screen" role="button" tabindex="0" aria-label="3. verzió lejátszása"><span class="tag">3</span><div class="mount"></div></div>
+      <h2><span>3</span> · Skicc + festés</h2>
+      <p>Előbb vékony kontúr rajzolódik végig a betűkön, aztán vonásonként telik fel festékkel. A leghosszabb, kb. 2,7 mp.</p>
+    </article>
+  </main>
+
+  <p class="foot">A főoldalon is megnézheted a teljes betöltéssel együtt: <a href="/?loader=1">/?loader=1</a> · <a href="/?loader=2">/?loader=2</a> · <a href="/?loader=3">/?loader=3</a></p>
+
+  <script type="module" src="/src/loader-preview.js"></script>
+</body>
+</html>
