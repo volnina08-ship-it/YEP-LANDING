@@ -56,22 +56,28 @@ function intro() {
   gsap.set('.hero__video', { opacity: 0, scale: 1.06, transformOrigin: '50% 50%' });
 
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  // a hero videó nem autoplay: a betöltő végén, kicsivel a függöny felcsúszása előtt indul, hogy az elejétől látsszon
+  const playHero = () => { const v = $('.hero__video'); if (v && v.tagName === 'VIDEO') v.play().catch(() => {}); };
 
   if (play && variant !== 'classic') {
     loader.classList.add('is-paint');
     const mount = mountLogo($('#loader-mark'), variant);
     tl.add(logoTimeline(mount, { paused: false }))
-      .to(loader, { yPercent: -100, duration: 0.95, ease: 'expo.inOut' }, '+=0.3')
+      .add(playHero, '+=0.15')
+      .to(loader, { yPercent: -100, duration: 0.95, ease: 'expo.inOut' }, '+=0.15')
       .set(loader, { display: 'none' });
   } else if (play) {
     tl.to('.loader__logo img', { opacity: 1, duration: 0.7, ease: 'power2.out' })
       .to('.loader__bar span', { scaleX: 1, duration: 1.0, ease: 'power3.inOut' }, '-=0.35')
       .to('.loader__logo img', { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in' }, '+=0.1')
-      .to(loader, { yPercent: -100, duration: 0.95, ease: 'expo.inOut' }, '-=0.15')
+      .add(playHero, '-=0.15')
+      .to(loader, { yPercent: -100, duration: 0.95, ease: 'expo.inOut' }, '<+0.15')
       .set(loader, { display: 'none' });
   } else {
+    playHero();
     tl.to(loader, { opacity: 0, duration: 0.35 }).set(loader, { display: 'none' });
   }
+  if (typeof window !== 'undefined') window.__yep.intro = tl;
 
   tl.to('.hero__video', { opacity: 1, scale: 1, duration: 1.8, ease: 'power2.out' }, play ? '-=0.75' : '<')
     .from('[data-hero="eyebrow"]', { y: 18, opacity: 0, duration: 0.8 }, '<+0.15')
@@ -178,6 +184,7 @@ function progressBar() {
 /* ---------- fallback: show everything ---------- */
 function revealEverything() {
   gsap.set('#loader', { display: 'none' });
+  const v = $('.hero__video'); if (v && v.tagName === 'VIDEO') v.play().catch(() => {});
   gsap.set('.hero__video', { opacity: 1, scale: 1 });
   gsap.set('.hero__title .line__in', { yPercent: 0 });
   gsap.set('[data-hero], [data-reveal], #nav', { opacity: 1, clearProps: 'transform,clipPath' });

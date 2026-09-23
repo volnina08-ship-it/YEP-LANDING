@@ -19,7 +19,8 @@ export function applyMedia({ lang = 'hu' } = {}) {
     if (el.tagName === 'VIDEO') {
       if (poster) el.poster = poster;
       if (!src) return;
-      if (el.hasAttribute('autoplay')) el.src = src;
+      // data-eager: azonnal betölt, de nem indul el (a hero videót a betöltő animáció indítja el a függöny előtt)
+      if (el.hasAttribute('autoplay') || el.hasAttribute('data-eager')) el.src = src;
       else el.dataset.src = src;
       // ha a videó nem játszható (hiányzó fájl, nem támogatott kodek), a poszter marad képként
       el.addEventListener('error', () => {
