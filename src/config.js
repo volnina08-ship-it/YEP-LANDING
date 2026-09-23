@@ -14,10 +14,10 @@ export const config = {
   // Kapcsolati e-mail (az űrlap hibaüzenetében és az „ajánlat” blokkban jelenik meg)
   email: import.meta.env.VITE_CONTACT_EMAIL || 'info@yepcontent.com',
 
-  // Külső linkek a fő weboldalra (ha üres, a link elrejtődik)
+  // Külső linkek (ha üres, a link elrejtődik). Az ügyfél kérésére nincs átirányítás a yepcontent.info-ra.
   links: {
-    about: 'https://yepcontent.info/',
-    projects: 'https://yepcontent.info/',
+    about: '',
+    projects: '',
   },
 
   // Social linkek (ha üres, a link elrejtődik)

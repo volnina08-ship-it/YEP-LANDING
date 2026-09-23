@@ -293,6 +293,7 @@ body.is-locked { overflow: hidden; }
 .clients__track { display: flex; width: max-content; animation: clients-marquee 55s linear infinite; will-change: transform; }
 .clients__group { display: flex; align-items: center; gap: clamp(44px, 5vw, 88px); padding-right: clamp(44px, 5vw, 88px); }
 .clients__group img { height: 30px; width: auto; opacity: 0.55; transition: opacity 0.4s; }
+.clients__group img[alt="Budapest Motors"] { opacity: 0.85; } /* vékony vonalas logó, különben túl sötétnek hat */
 .clients__group img:hover { opacity: 1; }
 @keyframes clients-marquee { to { transform: translateX(-50%); } }
 @media (max-width: 760px) { .clients { padding: 22px 0; } .clients__group img { height: 24px; } }
