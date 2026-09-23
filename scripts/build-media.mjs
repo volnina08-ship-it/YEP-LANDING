@@ -104,13 +104,20 @@ function encodeVideo(file, slug, info, opts = {}) {
   return { video: `/media/video/${name}.mp4`, poster: `/media/video/${name}.jpg`, portrait: info.portrait, duration: info.duration };
 }
 
-function encodePhoto(file, slug, info) {
-  const out = path.join(OUT_PHOTO, `${slug}.jpg`);
+function encodePhoto(file, slug, info, opts = {}) {
+  // opts (media.map.json objektum forma): cropTop – a kép tetejéből levágott hányad (0–1), pl. 0.25
+  const suffix = opts.cropTop ? `-ct${Math.round(opts.cropTop * 100)}` : '';
+  const name = `${slug}${suffix}`;
+  const out = path.join(OUT_PHOTO, `${name}.jpg`);
   if (!DRY && (FORCE || !newer(out, file))) {
-    console.log(`  ▣  ${path.basename(file)}  →  photo/${slug}.jpg`);
-    run('ffmpeg', ['-y', '-loglevel', 'error', '-i', file, '-vf', "scale='min(2000,iw)':'min(2000,ih)':force_original_aspect_ratio=decrease", '-q:v', '3', out]);
+    console.log(`  ▣  ${path.basename(file)}  →  photo/${name}.jpg`);
+    const vf = [];
+    if (opts.cropTop) vf.push(`crop=iw:ih*${(1 - opts.cropTop).toFixed(3)}:0:ih*${opts.cropTop.toFixed(3)}`);
+    vf.push("scale='min(2000,iw)':'min(2000,ih)':force_original_aspect_ratio=decrease");
+    run('ffmpeg', ['-y', '-loglevel', 'error', '-i', file, '-vf', vf.join(','), '-q:v', '3', out]);
   }
-  return { image: `/media/photo/${slug}.jpg`, portrait: info.portrait, square: info.square };
+  const portrait = opts.cropTop ? info.h * (1 - opts.cropTop) > info.w : info.portrait;
+  return { image: `/media/photo/${name}.jpg`, portrait, square: info.square };
 }
 
 /* ------------------------------------------------------------------ */
@@ -153,14 +160,16 @@ const manifest = JSON.parse(fs.readFileSync(BASE_MANIFEST, 'utf8'));
 const map = fs.existsSync(MAP_FILE) ? JSON.parse(fs.readFileSync(MAP_FILE, 'utf8')) : {};
 const report = [];
 
+// név szerinti keresés: ugyanaz a forrásfájl több slotra is kiosztható (pl. hero loop + teljes film), csak megjelöljük használtnak
 const findByName = (pool, name) => {
   const n = String(name).toLowerCase();
-  const i = pool.findIndex((x) => x.base.toLowerCase() === n || x.slug === slugify(name) || x.slug === slugify(path.parse(name).name));
-  return i >= 0 ? pool.splice(i, 1)[0] : null;
+  const item = pool.find((x) => x.base.toLowerCase() === n || x.slug === slugify(name) || x.slug === slugify(path.parse(name).name));
+  if (item) item.used = true;
+  return item || null;
 };
 const takeVideo = (pref) => {
   const order = pref === 'portrait' ? [(v) => v.portrait, () => true] : [(v) => !v.portrait, () => true];
-  for (const t of order) { const i = videos.findIndex(t); if (i >= 0) return videos.splice(i, 1)[0]; }
+  for (const t of order) { const i = videos.findIndex((v) => !v.used && t(v)); if (i >= 0) return videos.splice(i, 1)[0]; }
   return null;
 };
 const takePhoto = (pref) => {
@@ -169,7 +178,7 @@ const takePhoto = (pref) => {
     landscape: [(p) => !p.portrait && !p.square, (p) => p.square, () => true],
     square: [(p) => p.square, (p) => !p.portrait, () => true],
   }[pref];
-  for (const t of tests) { const i = photos.findIndex(t); if (i >= 0) return photos.splice(i, 1)[0]; }
+  for (const t of tests) { const i = photos.findIndex((p) => !p.used && t(p)); if (i >= 0) return photos.splice(i, 1)[0]; }
   return null;
 };
 const setVideo = (slot, target, item, from) => {
@@ -199,7 +208,13 @@ const mapVideo = (v) => {
   }
   return item;
 };
-const mapPhoto = (p) => findByName(photos, p);
+const mapPhoto = (p) => {
+  const spec = typeof p === 'object' && p ? p : { file: p };
+  const item = findByName(photos, spec.file);
+  if (!item) return null;
+  if (spec.cropTop) return { ...item, ...encodePhoto(item.src, item.slug, item.info, spec) };
+  return item;
+};
 if (map.hero) setVideo('hero', manifest.hero, mapVideo(map.hero), 'map');
 if (map.showreel) setVideo('showreel', manifest.showreel, mapVideo(map.showreel), 'map');
 // null a térképben = szándékosan üres slot: sárga „Videó kell” elem jelenik meg az oldalon, nincs automatikus kiosztás

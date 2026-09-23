@@ -12,7 +12,7 @@ export const config = {
   bookingUrl: import.meta.env.VITE_BOOKING_URL || '',
 
   // Kapcsolati e-mail (az űrlap hibaüzenetében és az „ajánlat” blokkban jelenik meg)
-  email: import.meta.env.VITE_CONTACT_EMAIL || 'yep.content@gmail.com',
+  email: import.meta.env.VITE_CONTACT_EMAIL || 'info@yepcontent.com',
 
   // Külső linkek a fő weboldalra (ha üres, a link elrejtődik)
   links: {
@@ -24,6 +24,6 @@ export const config = {
   socials: {
     instagram: 'https://www.instagram.com/yep_content/',
     linkedin: '',
-    youtube: 'https://www.youtube.com/channel/UCh_sfBPZJJ6f6AeFlgqmPUA',
+    youtube: '', // az ügyfél kérésére nincs YouTube link
   },
 };

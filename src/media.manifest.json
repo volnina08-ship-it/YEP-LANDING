@@ -13,7 +13,7 @@
     "portrait": false
   },
   "about": {
-    "image": "/media/photo/img-8497.jpg"
+    "image": "/media/photo/img-3628-3.jpg"
   },
   "services": [
     {
@@ -40,8 +40,8 @@
       "url": ""
     },
     {
-      "video": "/media/video/video-2026-02-11-10-01-51-3-s0-d20-m.mp4",
-      "poster": "/media/video/video-2026-02-11-10-01-51-3-s0-d20-m.jpg",
+      "video": "/media/video/dr-reels-1-v2-s0-d20-m.mp4",
+      "poster": "/media/video/dr-reels-1-v2-s0-d20-m.jpg",
       "portrait": true,
       "url": ""
     },
@@ -60,35 +60,35 @@
   ],
   "projects": [
     {
-      "video": "/media/video/2023-11-19-szoboszlai-eb-v3.mp4",
-      "poster": "/media/video/2023-11-19-szoboszlai-eb-v3.jpg",
+      "video": "/media/video/mt-szoboszlai-reels.mp4",
+      "poster": "/media/video/mt-szoboszlai-reels.jpg",
       "url": "",
-      "title": "Dominik Szoboszlai",
-      "sub": "Kampányfilm",
+      "title": "Szoboszlai × Madame Tussauds",
+      "sub": "Social film",
       "portrait": true
     },
     {
-      "video": null,
-      "poster": null,
+      "video": "/media/video/mercar-tvc-edit-5.mp4",
+      "poster": "/media/video/mercar-tvc-edit-5.jpg",
       "url": "",
-      "title": "FBC",
-      "sub": "Kampány",
-      "todo": true
+      "title": "Mercar TVC",
+      "sub": "Reklámfilm",
+      "portrait": false
     },
     {
-      "video": null,
-      "poster": null,
+      "video": "/media/video/2025-02-01-al-habtoor-image-v4.mp4",
+      "poster": "/media/video/2025-02-01-al-habtoor-image-v4.jpg",
       "url": "",
-      "title": "Clark",
-      "sub": "1 órás dokumentumfilm",
-      "todo": true
+      "title": "Al Habtoor Hotel",
+      "sub": "Imázsfilm",
+      "portrait": false
     },
     {
-      "video": "/media/video/budapart-projekt.mp4",
-      "poster": "/media/video/budapart-projekt.jpg",
+      "video": "/media/video/kimpton-trailer-1st-episode-v5.mp4",
+      "poster": "/media/video/kimpton-trailer-1st-episode-v5.jpg",
       "url": "",
-      "title": "Market Építő",
-      "sub": "Kampány",
+      "title": "Kimpton Bem Documentary",
+      "sub": "Dokumentumfilm",
       "portrait": false
     }
   ],
@@ -112,16 +112,16 @@
       "image": "/media/photo/bjp-4518-2.jpg"
     },
     {
-      "image": "/media/photo/jodokcello-yepcontent-76.jpg"
+      "image": "/media/photo/e2a5682.jpg"
     },
     {
       "image": "/media/photo/bw-3288.jpg"
     }
   ],
   "testimonial": {
-    "image": "/media/photo/jodokcello-yepcontent-88.jpg"
+    "image": "/media/photo/jodokcello-yepcontent-88-ct25.jpg"
   },
   "cta": {
-    "image": "/media/photo/img-3628-3.jpg"
+    "image": "/media/photo/img-3631-2.jpg"
   }
 }

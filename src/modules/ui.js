@@ -170,7 +170,8 @@ function initModal(msgs) {
       v.play().catch(() => {});
     }
     const title = entry.title || msgs.showreel;
-    caption.textContent = entry.sub ? `${title} — ${entry.sub}` : title;
+    const sub = trigger?.querySelector?.('.project__sub')?.textContent?.trim() || entry.sub;
+    caption.textContent = sub ? `${title} — ${sub}` : title;
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('is-locked');

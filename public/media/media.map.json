@@ -9,15 +9,20 @@
   "showreel": "yep showreel.mov",
   "projects": [
     {
-      "file": "2023_11_19_Szoboszlai_EB_v3.mov",
-      "crf": 27,
-      "maxHeight": 810
+      "file": "MT_SZOBOSZLAI_REELS.mp4",
+      "crf": 26
     },
-    null,
-    null,
     {
-      "file": "BudaPart projekt.mov",
+      "file": "MERCAR_TVC_edit_5.mp4",
+      "crf": 24
+    },
+    {
+      "file": "2025_02_01_Al_Habtoor_IMAGE_v4.mp4",
       "crf": 27
+    },
+    {
+      "file": "Kimpton - Trailer 1st Episode - v5.mp4",
+      "crf": 26
     }
   ],
   "social": [
@@ -38,7 +43,7 @@
       "maxHeight": 720
     },
     {
-      "file": "Video 2026. 02. 11., 10 01 51 (3).mp4",
+      "file": "DR_REELS_1_v2.mp4",
       "start": 0,
       "duration": 20,
       "mute": true,
@@ -62,7 +67,7 @@
       "maxHeight": 720
     }
   ],
-  "about": "IMG_8497.jpg",
+  "about": "IMG_3628 3.jpg",
   "services": [
     "9H3A8651_edit.jpg",
     "VRP_7873.jpg",
@@ -75,10 +80,13 @@
     "Tommy-3296.jpg",
     "YEP-9292.jpg",
     "BJP_4518-2.jpg",
-    "JodokCello_YepContent-76.jpg",
+    "_E2A5682.jpg",
     "bw-3288.jpg"
   ],
-  "testimonial": "JodokCello_YepContent-88.jpg",
-  "cta": "IMG_3628 3.jpg",
-  "_comment": "Videó slot: fájlnév, YouTube/Vimeo URL, objektum ({file,start,duration,mute,crf,maxHeight}) vagy null = sárga „Videó kell” placeholder az oldalon."
+  "testimonial": {
+    "file": "JodokCello_YepContent-88.jpg",
+    "cropTop": 0.25
+  },
+  "cta": "IMG_3631 2.jpg",
+  "_comment": "Videó slot: fájlnév, YouTube/Vimeo URL, objektum ({file,start,duration,mute,crf,maxHeight}) vagy null = sárga „Videó kell” placeholder. Fotó slot: fájlnév vagy {file, cropTop} (a kép tetejéből levágott hányad)."
 }

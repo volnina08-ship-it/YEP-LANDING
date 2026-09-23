@@ -23,13 +23,13 @@ Az oldal a Dropbox referencia-mappából válogatott, webre optimalizált anyago
 | --- | --- |
 | Hero háttérloop | `MERCAR_TVC_edit_5.mp4` első 21,5 mp, némítva |
 | Showreel (modal) | `KIEG/UJ NYERS/yep showreel.mov` |
-| Projekt: Dominik Szoboszlai | `Sport/2023_11_19_Szoboszlai_EB_v3.mov` (álló) |
-| Projekt: FBC | **„Videó kell”** csempe – nincs FBC-anyag a mappában |
-| Projekt: Clark | **„Videó kell”** csempe – nincs Clark-film a mappában |
-| Projekt: Market Építő | `Construction:Interior/BudaPart projekt.mov` |
-| Social csík (5) | Cupra 9:16, Bigfish vertical, TikTok (3), million roses, Szoboszlai díjátadó – 20 mp-es némított részletek |
+| Projekt: Szoboszlai × Madame Tussauds | `Social/Sport/MT_SZOBOSZLAI_REELS.mp4` (álló) |
+| Projekt: Mercar TVC | `TVC/MERCAR_TVC_edit_5.mp4` (teljes, hanggal) |
+| Projekt: Al Habtoor Hotel | `Image/2025_02_01_Al_Habtoor_IMAGE_v4.mp4` |
+| Projekt: Kimpton Bem Documentary | `Documentary/Kimpton - Trailer 1st Episode - v5.mp4` |
+| Social csík (5) | Cupra 9:16, Bigfish vertical, DR fashion reels, million roses, Szoboszlai díjátadó – 20 mp-es némított részletek |
 | Rólunk / CTA | `KIEG/YEP BTS` werkfotók |
-| Vélemény | `PHOTOS/Image/JodokCello_YepContent-88.jpg` (Al Habtoor lépcső) |
+| Vélemény | `PHOTOS/Image/JodokCello_YepContent-88.jpg` (Al Habtoor lépcső, felső 25% levágva) |
 | Szolgáltatások, galéria | `PHOTOS/Cars`, `Product`, `Events`, `Hotel`, `Image`, `Restaurants`, `Architect` válogatás |
 | Partner logók | `KIEG/Ref logók` fehér monokróm változatban (`public/media/clients`) |
 
@@ -42,7 +42,7 @@ npm run media         # ffmpeg: csak a media.map.json-ban kiosztott fájlokat k�
 
 Feltétel: `ffmpeg` és `ffprobe` a gépen (macOS: `brew install ffmpeg`).
 
-A `media.map.json` videó bejegyzése lehet fájlnév, YouTube/Vimeo URL, objektum: `{"file": "x.mp4", "start": 3, "duration": 15, "mute": true, "crf": 26, "maxHeight": 1080}` (vágás másodpercben, némítás, minőség), vagy `null` = sárga **„Videó kell”** csempe jelenik meg a slot helyén (a kártya nem nyit lejátszót). Jelenleg az FBC és a Clark projekt ilyen: ha megjön az anyaguk, írd be a fájlnevet és futtasd az `npm run media`-t.
+A `media.map.json` videó bejegyzése lehet fájlnév, YouTube/Vimeo URL, objektum: `{"file": "x.mp4", "start": 3, "duration": 15, "mute": true, "crf": 26, "maxHeight": 1080}` (vágás másodpercben, némítás, minőség), vagy `null` = sárga **„Videó kell”** csempe jelenik meg a slot helyén (a kártya nem nyit lejátszót). Fotó slotnál `{"file": "x.jpg", "cropTop": 0.25}` a kép tetejéből vág.
 
 ## Betöltő animáció – a felfestődő logó
 
