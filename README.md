@@ -21,7 +21,7 @@ Az oldal a Dropbox referencia-mappából válogatott, webre optimalizált anyago
 
 | Slot | Forrás (Dropbox) |
 | --- | --- |
-| Hero háttérloop | `MERCAR_TVC_edit_5.mp4` első 21,5 mp, némítva |
+| Hero háttérloop | `yep-weboldal.mp4` (az ügyfél CDN-jéről: cdn.kzhdigital.com/yep-weboldal.mp4), 1080p, némítva |
 | Showreel (modal) | `KIEG/UJ NYERS/yep showreel.mov` |
 | Projekt: Szoboszlai × Madame Tussauds | `Social/Sport/MT_SZOBOSZLAI_REELS.mp4` (álló) |
 | Projekt: Mercar TVC | `TVC/MERCAR_TVC_edit_5.mp4` (teljes, hanggal) |
