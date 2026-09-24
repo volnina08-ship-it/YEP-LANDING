@@ -216,7 +216,7 @@ body.is-locked { overflow: hidden; }
 .media-frame img, .media-frame video { width: 100%; height: 100%; object-fit: cover; }
 
 /* álló teraszos kép a fekvő kártyán: a kupola és a két szereplő is maradjon képben */
-img[data-media="services.1.image"] { object-position: 50% 42%; }
+img[data-media="services.1.image"] { object-position: 50% 64%; }
 
 /* ---------- „Videó kell” placeholder (media.map.json: null slot) ---------- */
 .todo-media { position: absolute; inset: 0; display: grid; place-items: center; background: var(--yellow); color: #0a0a0a; text-align: center; overflow: hidden; }
@@ -502,7 +502,7 @@ img[data-media="services.1.image"] { object-position: 50% 42%; }
   .about__grid, .cta__grid, .quote-form__grid { grid-template-columns: 1fr; }
   .about__media { max-width: 100%; aspect-ratio: 4 / 5; }
   .services__grid { grid-template-columns: 1fr; gap: 40px; }
-  .card__media { aspect-ratio: 16 / 10; }
+  .card__media { aspect-ratio: 4 / 3; } /* álló képnél (social) így férnek bele a szereplők */
   .section__head { flex-direction: column; align-items: flex-start; gap: 16px; }
   .section__note { text-align: left; padding-bottom: 0; }
   .quote__grid { grid-template-columns: 1fr; min-height: 0; }
