@@ -22,6 +22,8 @@ Az oldal a Dropbox referencia-mappából válogatott, webre optimalizált anyago
 | Slot | Forrás (Dropbox) |
 | --- | --- |
 | Hero háttérloop | `yep-weboldal.mp4` (az ügyfél CDN-jéről: cdn.kzhdigital.com/yep-weboldal.mp4), 1080p, némítva |
+| Szolgáltatások – Események | az ügyfél által küldött gálakép (`media-source/UGYFEL/esemenyek-rossmann-gala.jpg`) |
+| Megosztási előnézet (og:image) | `public/og-image.png` – csak a logó sötét háttéren; abszolút URL-lel az index.html-ben, domainváltáskor frissítendő |
 | Showreel (modal) | `KIEG/UJ NYERS/yep showreel.mov` |
 | Projekt: Szoboszlai × Madame Tussauds | `Social/Sport/MT_SZOBOSZLAI_REELS.mp4` (álló) |
 | Projekt: Mercar TVC | `TVC/MERCAR_TVC_edit_5.mp4` (teljes, hanggal) |
