@@ -59,6 +59,10 @@ A logó a `public/logo.svg` vektoraiból ecsetvonásonként „festődik fel” 
 
 Előnézet: `/loader-preview.html` (mindhárom egymás mellett, újrajátszás, lassítás), vagy a főoldalon `/?loader=1`, `/?loader=2`, `/?loader=3` (ez a session-memóriától függetlenül mindig lejátssza).
 
+## Meta Pixel
+
+A `<head>`-ben fut a Meta Pixel (ID: 355119579237891), `PageView` minden betöltésnél; a `<noscript>` tartalék a `<body>` elején van. `Lead` esemény megy ki kattintásra minden `data-fb-lead` jelölésű gombról: a fejléc és a mobilmenü „Időpontot foglalok”, a CTA-blokk „Időpontot foglalok” és „E-mail árajánlatot kérek”, valamint az űrlap melletti e-mail link. Új gombhoz elég a `data-fb-lead` attribútum.
+
 ## Ajánlatkérő űrlap – Supabase
 
 - Projekt: `https://qelmzmzpicsdaiagitsa.supabase.co`, tábla: `public.quote_requests`

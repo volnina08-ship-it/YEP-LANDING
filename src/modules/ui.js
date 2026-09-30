@@ -17,6 +17,7 @@ export function initUI({ config, lang }) {
   initModal(msgs);
   initCursor();
   initPreselect();
+  initPixelEvents();
 }
 
 /* ---------- links from config ---------- */
@@ -216,5 +217,14 @@ function initPreselect() {
   if (!select) return;
   document.querySelectorAll('[data-preselect]').forEach((a) => {
     a.addEventListener('click', () => { select.value = a.dataset.preselect; });
+  });
+}
+
+/* ---------- Meta Pixel: Lead esemény az időpontfoglalás / e-mail gombokon (data-fb-lead) ---------- */
+function initPixelEvents() {
+  document.querySelectorAll('[data-fb-lead]').forEach((el) => {
+    el.addEventListener('click', () => {
+      try { if (typeof window.fbq === 'function') window.fbq('track', 'Lead'); } catch (_) { /* noop */ }
+    });
   });
 }

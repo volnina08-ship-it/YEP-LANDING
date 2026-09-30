@@ -19,8 +19,26 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://yep-landing.vercel.app/og-image.png" />
   <meta property="og:locale" content="hu_HU" />
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '355119579237891');
+  fbq('track', 'PageView');
+  </script>
+  <!-- End Meta Pixel Code -->
 </head>
 <body>
+  <!-- Meta Pixel (noscript) – a body elején, mert a head-ben a HTML-parser nem engedi -->
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=355119579237891&ev=PageView&noscript=1"
+  /></noscript>
   <!-- Preloader -->
   <div class="loader" id="loader" aria-hidden="true">
     <div class="loader__logo"><img src="/logo.svg" alt="" width="200" height="115" /></div>
@@ -45,7 +63,7 @@
         <a href="#ajanlat" data-i18n="nav.contact">Kapcsolat</a>
       </nav>
       <div class="nav__right">
-        <a class="btn btn--primary btn--sm" href="#ajanlat" data-booking data-i18n="nav.book">Időpontot foglalok</a>
+        <a class="btn btn--primary btn--sm" href="#ajanlat" data-booking data-fb-lead data-i18n="nav.book">Időpontot foglalok</a>
         <div class="lang" aria-label="Nyelv">
           <a href="?lang=hu" data-lang-link="hu" class="is-active">HU</a><span>/</span><a href="?lang=en" data-lang-link="en">EN</a>
         </div>
@@ -64,7 +82,7 @@
         <a href="#ajanlat" data-i18n="nav.contact">Kapcsolat</a>
       </nav>
       <div class="menu__foot">
-        <a class="btn btn--primary" href="#ajanlat" data-booking data-i18n="nav.book">Időpontot foglalok</a>
+        <a class="btn btn--primary" href="#ajanlat" data-booking data-fb-lead data-i18n="nav.book">Időpontot foglalok</a>
         <div class="menu__socials">
           <a data-social="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
           <a data-social="linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
@@ -295,8 +313,8 @@
           <h2 class="h2 h2--xl" data-split data-i18n="cta.title">Van egy projekted? Beszéljünk róla.</h2>
           <p class="lead" data-reveal data-i18n="cta.text">Foglalj egy 30 perces konzultációt, vagy kérj e-mailben árajánlatot.</p>
           <div class="cta__actions" data-reveal>
-            <a class="btn btn--primary" href="#ajanlat" data-booking><span data-i18n="cta.book">Időpontot foglalok</span><i class="btn__arrow" aria-hidden="true">→</i></a>
-            <a class="btn btn--ghost" href="#ajanlat" data-i18n="cta.mail">E-mail árajánlatot kérek</a>
+            <a class="btn btn--primary" href="#ajanlat" data-booking data-fb-lead><span data-i18n="cta.book">Időpontot foglalok</span><i class="btn__arrow" aria-hidden="true">→</i></a>
+            <a class="btn btn--ghost" href="#ajanlat" data-fb-lead data-i18n="cta.mail">E-mail árajánlatot kérek</a>
           </div>
         </div>
         <figure class="cta__media media-frame" data-reveal="clip"><img data-media="cta.image" alt="" loading="lazy" /></figure>
@@ -315,7 +333,7 @@
             <li><i></i><span data-i18n="form.p2">Koncepciótól a kész anyagig</span></li>
             <li><i></i><span data-i18n="form.p3">Budapest – Hungary</span></li>
           </ul>
-          <a class="quote-form__mail link" data-reveal data-mailto href="#"><span data-mailto-text>info@yepcontent.com</span> <i aria-hidden="true">→</i></a>
+          <a class="quote-form__mail link" data-reveal data-mailto data-fb-lead href="#"><span data-mailto-text>info@yepcontent.com</span> <i aria-hidden="true">→</i></a>
         </div>
 
         <form class="form" id="quote-form" novalidate data-reveal>
