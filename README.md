@@ -63,6 +63,16 @@ Előnézet: `/loader-preview.html` (mindhárom egymás mellett, újrajátszás, 
 
 A `<head>`-ben fut a Meta Pixel (ID: 355119579237891), `PageView` minden betöltésnél; a `<noscript>` tartalék a `<body>` elején van. `Lead` esemény megy ki kattintásra minden `data-fb-lead` jelölésű gombról: a fejléc és a mobilmenü „Időpontot foglalok”, a CTA-blokk „Időpontot foglalok” és „E-mail árajánlatot kérek”, valamint az űrlap melletti e-mail link. Új gombhoz elég a `data-fb-lead` attribútum.
 
+## Ajánlatkérő űrlap – e-mail értesítés (Resend)
+
+Minden beküldés két csatornán megy, párhuzamosan: a Supabase `quote_requests` táblába (lista, státusz) és e-mailben a Resenden keresztül az info@yepcontent.com címre. Ha legalább az egyik sikerül, a kitöltő a „Köszönjük” üzenetet látja, így egy ajánlatkérés akkor sem vész el, ha az egyik szolgáltatás épp nem elérhető.
+
+- Végpont: `api/contact.js` (Vercel Function, `POST /api/contact`), npm csomag nélkül, sima `fetch`-csel a Resend API felé.
+- Feladó: `YEP Content weboldal <noreply@web.kzhdigital.com>` (a KZH Resend-fiókjában hitelesített domain). A levél „Válasz” gombja a kitöltő címét hozza.
+- Spam-védelem: rejtett honeypot mező (`website`), 3 mp-es minimális kitöltési idő, IP-nként 5 üzenet / 10 perc.
+- Vercel környezeti változók (Production + Preview): `RESEND_API_KEY` (Sensitive), `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`. Módosítás után Redeploy kell.
+- Hibakeresés: Vercel → Logs, szűrés a `[contact]` szóra; Resend → Emails a küldések státuszával (Sent / Delivered / Bounced).
+
 ## Ajánlatkérő űrlap – Supabase
 
 - Projekt: `https://qelmzmzpicsdaiagitsa.supabase.co`, tábla: `public.quote_requests`

@@ -27,6 +27,7 @@ export function initForm({ config, lang }) {
   const success = document.getElementById('form-success');
   const submitBtn = form.querySelector('button[type="submit"]');
   const attribution = captureAttribution();
+  const startedAt = Date.now(); // a szerveroldali „túl gyors beküldés” szűréshez
 
   const fieldWrap = (input) => input.closest('.field, .check');
   const clear = (input) => fieldWrap(input)?.classList.remove('is-invalid');
@@ -107,7 +108,10 @@ export function initForm({ config, lang }) {
 
     setLoading(true);
     status.textContent = msgs.sending;
-    try {
+
+    // két csatorna párhuzamosan: Supabase (mentés) + /api/contact (e-mail a Resenden át).
+    // Ha legalább az egyik sikerül, az ajánlatkérés nem veszett el → siker.
+    const saveToSupabase = async () => {
       const res = await fetch(`${config.supabaseUrl}/rest/v1/${config.table}`, {
         method: 'POST',
         headers: {
@@ -123,6 +127,21 @@ export function initForm({ config, lang }) {
         try { detail = (await res.json()).message || ''; } catch (_) { /* noop */ }
         throw new Error(`Supabase ${res.status} ${detail}`);
       }
+    };
+    const sendEmail = async () => {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...payload, lang, startedAt, website: form.elements.website.value }),
+      });
+      if (!res.ok) throw new Error(`E-mail ${res.status}`);
+    };
+
+    try {
+      const [db, mail] = await Promise.allSettled([saveToSupabase(), sendEmail()]);
+      if (db.status === 'rejected') console.error('[yep] supabase save failed', db.reason);
+      if (mail.status === 'rejected') console.error('[yep] e-mail notification failed', mail.reason);
+      if (db.status === 'rejected' && mail.status === 'rejected') throw new Error('both channels failed');
       status.textContent = '';
       showSuccess();
     } catch (err) {
