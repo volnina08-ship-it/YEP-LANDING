@@ -61,7 +61,9 @@ Előnézet: `/loader-preview.html` (mindhárom egymás mellett, újrajátszás, 
 
 ## Meta Pixel
 
-A `<head>`-ben fut a Meta Pixel (ID: 355119579237891), `PageView` minden betöltésnél; a `<noscript>` tartalék a `<body>` elején van. `Lead` esemény megy ki kattintásra minden `data-fb-lead` jelölésű gombról: a fejléc és a mobilmenü „Időpontot foglalok”, a CTA-blokk „Időpontot foglalok” és „E-mail árajánlatot kérek”, valamint az űrlap melletti e-mail link. Új gombhoz elég a `data-fb-lead` attribútum.
+A `<head>`-ben fut a Meta Pixel (ID: 355119579237891), `PageView` minden oldalbetöltésnél; a `<noscript>` tartalék a `<body>` elején van.
+
+**Lead = sikeres űrlapbeküldés.** Sikeres beküldés után az oldal a `/koszonjuk` köszönőoldalra irányít (`koszonjuk.html`, angolul `/koszonjuk?lang=en`), és a `fbq('track', 'Lead')` ott fut le. Csak akkor, ha a form.js előtte beállította a `yep-lead-pending` jelzőt a sessionStorage-ban, így a köszönőoldal frissítése vagy közvetlen megnyitása nem számít leadnek. A gombkattintások (Időpontot foglalok, e-mail) már nem küldenek Leadet. A PPC-ben URL-alapú konverzióként is használható a `/koszonjuk` oldal.
 
 ## Ajánlatkérő űrlap – e-mail értesítés (Resend)
 

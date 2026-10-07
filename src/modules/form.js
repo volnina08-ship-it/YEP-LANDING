@@ -68,7 +68,6 @@ export function initForm({ config, lang }) {
     success.hidden = false;
     form.classList.add('is-sent');
     success.querySelector('h3')?.focus?.();
-    try { window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'quote_request_submitted' }); } catch (_) { /* noop */ }
   };
 
   form.addEventListener('submit', async (e) => {
@@ -76,7 +75,7 @@ export function initForm({ config, lang }) {
     status.textContent = '';
     status.classList.remove('is-error');
 
-    // honeypot: robotok kitöltik → csendben "siker"
+    // honeypot: robotok kitöltik → csendben „siker” (nincs átirányítás, nincs Lead)
     if (form.elements.website.value) { showSuccess(); return; }
 
     const errors = validate();
@@ -143,7 +142,10 @@ export function initForm({ config, lang }) {
       if (mail.status === 'rejected') console.error('[yep] e-mail notification failed', mail.reason);
       if (db.status === 'rejected' && mail.status === 'rejected') throw new Error('both channels failed');
       status.textContent = '';
-      showSuccess();
+      // Meta Pixel Lead: a köszönőoldal küldi el, csak ha ez a jelző ott van (közvetlen megnyitás / frissítés nem számít leadnek)
+      try { sessionStorage.setItem('yep-lead-pending', '1'); } catch (_) { /* noop */ }
+      try { window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'quote_request_submitted' }); } catch (_) { /* noop */ }
+      location.assign(lang === 'en' ? '/koszonjuk?lang=en' : '/koszonjuk');
     } catch (err) {
       console.error('[yep] quote request failed', err);
       showError(msgs.error);

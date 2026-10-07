@@ -558,3 +558,13 @@ img[data-media="services.1.image"] { object-position: 50% 64%; }
   .rec__dot { animation: none; }
   .hero__video { opacity: 1; }
 }
+
+/* ---------- köszönőoldal (/koszonjuk) ---------- */
+.thanks { min-height: 100svh; display: grid; grid-template-rows: auto 1fr; gap: 40px; padding: clamp(28px, 5vw, 56px) var(--gutter) clamp(40px, 8vw, 96px); max-width: var(--max); margin: 0 auto; }
+.thanks__logo img { width: clamp(120px, 12vw, 170px); height: auto; }
+.thanks__body { align-self: center; max-width: 680px; }
+.thanks__icon { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--yellow); color: #0a0a0a; margin-bottom: 28px; }
+.thanks__title { font-size: clamp(40px, 6vw, 84px); font-weight: 800; line-height: 0.98; letter-spacing: -0.03em; margin: 14px 0 22px; }
+.thanks__text { font-size: clamp(16px, 1.3vw, 19px); color: var(--fg-dim); max-width: 46ch; margin-bottom: 36px; }
+.thanks__text a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 480px) { .thanks .btn { width: 100%; } }
