@@ -145,6 +145,8 @@ export function initForm({ config, lang }) {
       // Meta Pixel Lead: a köszönőoldal küldi el, csak ha ez a jelző ott van (közvetlen megnyitás / frissítés nem számít leadnek)
       try { sessionStorage.setItem('yep-lead-pending', '1'); } catch (_) { /* noop */ }
       try { window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'quote_request_submitted' }); } catch (_) { /* noop */ }
+      // Vercel Web Analytics: sikeres ajánlatkérés (csak a szolgáltatás és a nyelv, személyes adat nélkül)
+      try { window.va && window.va('event', { name: 'quote_request_submitted', data: { service: v('service').slice(0, 80) || 'nincs', language: lang } }); } catch (_) { /* noop */ }
       location.assign(lang === 'en' ? '/koszonjuk?lang=en' : '/koszonjuk');
     } catch (err) {
       console.error('[yep] quote request failed', err);

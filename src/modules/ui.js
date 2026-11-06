@@ -10,6 +10,7 @@ export function initUI({ config, lang }) {
   document.getElementById('year').textContent = String(new Date().getFullYear());
 
   initLinks(config);
+  initTracking();
   initNav();
   initMenu();
   initTimecodes();
@@ -42,6 +43,30 @@ function initLinks(config) {
     a.href = `mailto:${config.email}`;
     const t = a.querySelector('[data-mailto-text]');
     if (t) t.textContent = config.email;
+  });
+}
+
+/* ---------- Vercel Web Analytics custom eventek (delegált kattintás-figyelők) ---------- */
+function track(name, data) {
+  try { window.va && window.va('event', { name, data }); } catch (_) { /* noop */ }
+}
+
+function initTracking() {
+  document.addEventListener('click', (e) => {
+    const t = e.target;
+    if (!t?.closest) return;
+    const cta = t.closest('a[href="#ajanlat"][data-booking], a[href="#ajanlat"][data-preselect], a[href="#ajanlat"].btn');
+    if (cta) {
+      const location = cta.closest('nav, .nav') ? 'nav' : (cta.closest('header, section')?.id || 'page');
+      track('cta_quote_click', { location, service: cta.dataset.preselect || 'general' });
+    }
+    const mail = t.closest('a[href^="mailto:"]');
+    if (mail) {
+      const location = mail.closest('#quote-form') ? 'form_error' : (mail.hasAttribute('data-mailto') ? 'quote_block' : 'other');
+      track('email_click', { location });
+    }
+    const ig = t.closest('a[data-social="instagram"]');
+    if (ig) track('instagram_click', { network: 'instagram' });
   });
 }
 
@@ -151,6 +176,7 @@ function initModal(msgs) {
   const open = (key, trigger) => {
     const entry = getMedia(key);
     if (!entry || entry.todo) return;
+    track('showreel_open', { video: String(key).slice(0, 80) });
     lastFocus = trigger;
     player.innerHTML = '';
     player.classList.toggle('is-portrait', entry.portrait === true);
